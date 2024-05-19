@@ -6,7 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.zerentapp.presentation.screen.About
 import com.example.zerentapp.presentation.screen.Order
-import com.example.zerentapp.presentation.screen.Request
+import com.example.zerentapp.presentation.screen.RequestScreen
+import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.Whishlist
 import com.example.zerentapp.presentation.screen.home
 
@@ -20,7 +21,7 @@ fun BottomNavGraph(navController: NavHostController) {
             home()
         }
         composable(route = BottomBarScreen.Request.route) {
-            Request()
+            RequestScreen()
         }
         composable(route = BottomBarScreen.Whishlist.route) {
             Whishlist()

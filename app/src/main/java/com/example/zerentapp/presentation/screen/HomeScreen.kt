@@ -258,7 +258,7 @@ fun home(modifier: Modifier = Modifier) {
                 ) {
                     Card(
                         modifier = Modifier
-                            .width(170.dp)
+                            .width(150.dp)
                             .height(270.dp),
                         elevation = CardDefaults.cardElevation(10.dp),
                         colors = CardDefaults.cardColors(
@@ -381,11 +381,13 @@ fun home(modifier: Modifier = Modifier) {
                             }
                         }
                     }
+                    
+                    Spacer(modifier = modifier.width(20.dp))
 
                     // Tambahkan Card kedua jika diperlukan
                     Card(
                         modifier = Modifier
-                            .width(170.dp)
+                            .width(150.dp)
                             .height(270.dp),
                         elevation = CardDefaults.cardElevation(10.dp),
                         colors = CardDefaults.cardColors(
@@ -546,7 +548,7 @@ fun home(modifier: Modifier = Modifier) {
                 ) {
                     Card(
                         modifier = Modifier
-                            .width(170.dp)
+                            .width(150.dp)
                             .height(270.dp),
                         elevation = CardDefaults.cardElevation(10.dp),
                         colors = CardDefaults.cardColors(
@@ -673,7 +675,7 @@ fun home(modifier: Modifier = Modifier) {
                     // Tambahkan Card kedua jika diperlukan
                     Card(
                         modifier = Modifier
-                            .width(170.dp)
+                            .width(150.dp)
                             .height(270.dp),
                         elevation = CardDefaults.cardElevation(10.dp),
                         colors = CardDefaults.cardColors(
@@ -797,6 +799,9 @@ fun home(modifier: Modifier = Modifier) {
                         }
                     }
                 }
+
+
+                Spacer(modifier = modifier.height(30.dp))
             }
         }
     }

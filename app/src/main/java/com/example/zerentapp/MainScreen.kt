@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -57,8 +58,7 @@ fun BottomBar(navController: NavHostController) {
 
 
     Row (modifier = Modifier
-        .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 8.dp)
-        .background(Color.Transparent)
+        .background(Color(0xFF043C5B))
         .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically){
@@ -90,9 +90,9 @@ fun AddItem(
 
     Box(
         modifier = Modifier
-            .height(40.dp)
+            .height(50.dp)
             .clip(CircleShape)
-            .background(background)
+            //.background(background)
             .clickable(onClick = {
                 navController.navigate(screen.route) {
                     popUpTo(navController.graph.findStartDestination().id)
@@ -102,16 +102,18 @@ fun AddItem(
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 8.dp),
+                .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Icon(imageVector = screen.icon, contentDescription = null)
+            Icon(painter = painterResource(id = if (selected) screen.iconSelected else screen.icon),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp))
             AnimatedVisibility(visible = selected) {
-                Text(
-                    text = screen.title,
-                    color = contentColor
-                )
+//                Text(
+//                    text = screen.title,
+//                    color = contentColor
+//                )
             }
         }
     }
