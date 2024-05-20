@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.zerentapp.data.DummyData.onboardings
 import com.example.zerentapp.presentation.component.FinishButton
 import com.example.zerentapp.presentation.component.OnBoarding
@@ -34,7 +35,7 @@ import com.example.zerentapp.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen (){
+fun OnBoardingScreen(navController: NavHostController) {
     Column (
         modifier = Modifier.fillMaxSize()
     ){
@@ -74,7 +75,9 @@ fun OnBoardingScreen (){
 
         FinishButton(
             modifier = Modifier.weight(1f),
-            pagerState = pagerState) {
+            pagerState = pagerState,
+           navController = navController
+            ) {
 
         }
 

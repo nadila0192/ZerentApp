@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.zerentapp.data.DummyData.onboardings
 import com.example.zerentapp.model.Onboarding
 import com.example.zerentapp.ui.theme.ZerentAppTheme
@@ -81,6 +82,7 @@ fun OnBoarding(
 fun FinishButton(
     modifier: Modifier,
     pagerState: PagerState,
+    navController: NavController,
     onClick: () -> Unit
 ){
     Row (
@@ -95,7 +97,7 @@ fun FinishButton(
             visible = pagerState.currentPage == 3
         ) {
             Button(
-                onClick = onClick,
+                onClick = { navController.navigate("home") },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = color1
                 )

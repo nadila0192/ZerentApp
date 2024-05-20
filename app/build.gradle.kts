@@ -72,4 +72,13 @@ dependencies {
     //splash
     implementation ("androidx.core:core-splashscreen:1.0.0-beta02")
 
+    // Extended Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
+
+    //navigasi
+    val nav_version = "2.7.7"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
 }
