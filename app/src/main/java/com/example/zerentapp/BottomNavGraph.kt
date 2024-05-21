@@ -8,7 +8,7 @@ import com.example.zerentapp.presentation.screen.About
 import com.example.zerentapp.presentation.screen.Order
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
-import com.example.zerentapp.presentation.screen.Whishlist
+import com.example.zerentapp.presentation.screen.WishlistScreen
 import com.example.zerentapp.presentation.screen.home
 
 @Composable
@@ -24,7 +24,7 @@ fun BottomNavGraph(navController: NavHostController) {
             RequestScreen()
         }
         composable(route = BottomBarScreen.Whishlist.route) {
-            Whishlist()
+            WishlistScreen()
         }
         composable(route = BottomBarScreen.Order.route) {
             Order()
