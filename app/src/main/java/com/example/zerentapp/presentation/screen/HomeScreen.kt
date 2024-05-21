@@ -89,8 +89,8 @@ fun home(modifier: Modifier = Modifier) {
         ) {
             item {
                 Row {
-                    Icon(
-                        imageVector = Icons.Default.Person,
+                    Image(
+                        painter = painterResource(id = R.drawable.logo_zerent),
                         contentDescription = null,
                         Modifier.size(50.dp)
                     )

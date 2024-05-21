@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.zerentapp.presentation.screen.About
 import com.example.zerentapp.presentation.screen.Order
+import com.example.zerentapp.presentation.screen.ProfileScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.WishlistScreen
@@ -30,7 +30,7 @@ fun BottomNavGraph(navController: NavHostController) {
             Order()
         }
         composable(route = BottomBarScreen.About.route) {
-            About()
+            ProfileScreen()
         }
     }
 }
