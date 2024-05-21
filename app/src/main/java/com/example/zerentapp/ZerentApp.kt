@@ -7,14 +7,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,24 +29,48 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Magenta
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.zerentapp.navigation.NavigationItem
+import com.example.zerentapp.navigation.Screen
+import com.example.zerentapp.presentation.screen.HomeScreen
+import com.example.zerentapp.presentation.screen.LoginScreen
+import com.example.zerentapp.presentation.screen.OnBoardingScreen
+import com.example.zerentapp.presentation.screen.RegisterScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    Scaffold(
-          bottomBar = { BottomBar(navController = navController)}
-    ) {
-        BottomNavGraph(navController = navController)
+fun ZerentApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
+) {
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Onboarding.route,
+        ) {
+            composable(Screen.Onboarding.route){
+                OnBoardingScreen(navController)
+            }
+            composable(Screen.Login.route){
+                LoginScreen(navController)
+            }
+            composable(Screen.Register.route){
+                RegisterScreen(navController)
+            }
+            composable(Screen.Home.route){
+                HomeScreen(navController)
+            }
+        }
+
     }
-}
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -69,10 +97,7 @@ fun BottomBar(navController: NavHostController) {
         }
     }
 
-   }
-
-
-
+}
 
 @Composable
 fun AddItem(

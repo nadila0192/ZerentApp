@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -146,7 +146,7 @@ fun RequestCard(
                 }
                 Spacer(modifier = Modifier.width(130.dp))
                 Icon(
-                    imageVector = Icons.Default.MoreHoriz,
+                    imageVector = Icons.Default.MoreVert,
                     contentDescription = "More options",
                     modifier = Modifier
                         .size(24.dp)
