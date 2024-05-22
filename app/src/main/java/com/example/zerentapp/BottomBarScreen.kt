@@ -1,15 +1,5 @@
 package com.example.zerentapp
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddShoppingCart
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Note
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.filled.ShoppingCartCheckout
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
-
 sealed class BottomBarScreen(
     val route :String,
     val title: String,

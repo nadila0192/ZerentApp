@@ -97,7 +97,7 @@ fun FinishButton(
             visible = pagerState.currentPage == 3
         ) {
             Button(
-                onClick = { navController.navigate("home") },
+                onClick = { navController.navigate("login") },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = color1
                 )
