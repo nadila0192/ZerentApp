@@ -1,4 +1,4 @@
-package com.example.zerentapp
+package com.example.zerentapp.presentation.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -74,13 +74,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.R
 import com.example.zerentapp.presentation.component.SearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun home(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     Scaffold {
         LazyColumn(
             modifier = Modifier
@@ -89,8 +94,8 @@ fun home(modifier: Modifier = Modifier) {
         ) {
             item {
                 Row {
-                    Icon(
-                        imageVector = Icons.Default.Person,
+                    Image(
+                        painter = painterResource(id = R.drawable.logo_zerent),
                         contentDescription = null,
                         Modifier.size(50.dp)
                     )
@@ -105,7 +110,7 @@ fun home(modifier: Modifier = Modifier) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                SearchBar()
+                SearchBar(modifier = Modifier)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -381,7 +386,7 @@ fun home(modifier: Modifier = Modifier) {
                             }
                         }
                     }
-                    
+
                     Spacer(modifier = modifier.width(20.dp))
 
                     // Tambahkan Card kedua jika diperlukan
@@ -810,5 +815,5 @@ fun home(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun homeprev() {
-    home()
+    HomeScreen(navController = rememberNavController())
 }
