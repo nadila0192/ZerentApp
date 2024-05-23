@@ -3,9 +3,15 @@ package com.example.zerentapp.presentation.screen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,7 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.zerentapp.R
+import com.example.zerentapp.data.Data
 import com.example.zerentapp.presentation.component.ProductCard
+import com.example.zerentapp.presentation.component.ProductWhislist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -221,26 +229,22 @@ fun WishlistScreen() { // Use WishlistScreen for clarity
                     }
                 }
                 Spacer(modifier = Modifier.height(15.dp))
+                    val barangs = remember { Data.dataBarang }
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(
+                            items = barangs,
+                            itemContent = {
+                                ProductWhislist(dBarang = it)
+                                Spacer(modifier = Modifier.width(10.dp))
+                            }
+                        )
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    ProductCard(
-                        imageProduct = R.drawable.productcamera,
-                        titleProduct = "Kamera EOS 3000D",
-                        address = "Batam",
-                        categoryProduct = "Hobi",
-                        priceProduct ="125.000"
-                    )
-                    ProductCard(
-                        imageProduct = R.drawable.productsepeda,
-                        titleProduct = "Rental Sepeda MTB",
-                        address = "Kawal",
-                        categoryProduct = "Hobi",
-                        priceProduct ="180.000"
-                    )
-                }
 
             }
         }

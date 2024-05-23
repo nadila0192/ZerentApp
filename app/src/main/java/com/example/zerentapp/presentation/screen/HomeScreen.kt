@@ -2,7 +2,6 @@ package com.example.zerentapp.presentation.screen
 
 import android.annotation.SuppressLint
 import android.provider.CalendarContract
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -78,6 +77,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.R
 import com.example.zerentapp.presentation.component.SearchBar
+import com.example.zerentapp.ui.theme.color1
+import com.example.zerentapp.ui.theme.colorBintang
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.lazy.items
+import com.example.zerentapp.data.Data
+import com.example.zerentapp.presentation.component.ProductCard
+import com.example.zerentapp.ui.theme.poppinsFontFamily
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -93,13 +100,22 @@ fun HomeScreen(
                 .fillMaxSize()
         ) {
             item {
+                Spacer(modifier = Modifier.height(10.dp))
                 Row {
+                    Card (
+                        shape = CircleShape,
+                        modifier = Modifier
+                            .size(40.dp)
+                    ) {
                     Image(
-                        painter = painterResource(id = R.drawable.logo_zerent),
+                        painter = painterResource(id = R.drawable.profil),
                         contentDescription = null,
-                        Modifier.size(50.dp)
+                        Modifier
+                            .wrapContentSize(),
+                        contentScale = ContentScale.Crop
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    }
+                    Spacer(modifier = Modifier.width(15.dp))
                     Text(
                         text = "Selamat Datang, MJ!",
                         fontWeight = FontWeight.Bold,
@@ -110,7 +126,10 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                SearchBar(modifier = Modifier)
+                SearchBar(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -119,15 +138,16 @@ fun HomeScreen(
                     items(3) {
                         Card(
                             modifier
-                                .height(100.dp)
-                                .width(350.dp)
+                                .height(120.dp)
+                                .width(353.dp)
                                 .fillMaxWidth()
-                                .padding(5.dp)
+                                .padding(end = 5.dp)
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.bannerpromohome),
                                 contentDescription = null,
-                                modifier = Modifier.fillMaxSize(1f),
+                                modifier = Modifier
+                                    .fillMaxSize(1f),
                                 contentScale = ContentScale.FillWidth
                             )
                         }
@@ -137,7 +157,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
                         text = "Kategori",
@@ -146,15 +166,22 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = "more",
-                        textDecoration = TextDecoration.Underline
+                        text = "More",
+                        fontFamily = poppinsFontFamily, fontWeight = FontWeight.W500,
+                        color = color1,
+                        textDecoration = TextDecoration.Underline,
+                        modifier = Modifier
+                            .padding(top = 3.dp)
                     )
                     Icon(
                         Icons.Default.ArrowDropDown,
                         contentDescription = null,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(top = 3.dp),
                     )
                 }
+                Spacer(modifier = Modifier.height(10.dp))
 
                 // Kategori
                 Column(
@@ -254,278 +281,25 @@ fun HomeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
                 // Card terbaru
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Card(
-                        modifier = Modifier
-                            .width(150.dp)
-                            .height(270.dp),
-                        elevation = CardDefaults.cardElevation(10.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
-                        )
+                    val barangs = remember { Data.dataBarang }
+                    LazyRow(
                     ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Top
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .height(110.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.productcamera),
-                                        contentDescription = "Foto Produk",
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier.fillMaxSize()
-                                    )
-
-                                    IconButton(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat ikon diklik */ },
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(8.dp) // Padding untuk memberikan jarak dari tepi
-                                            .size(24.dp) // Ukuran ikon
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.FavoriteBorder,
-                                            contentDescription = "Love",
-                                            tint = Color.Gray // Warna ikon
-                                        )
-                                    }
-                                }
+                        items(
+                            items = barangs,
+                            itemContent = {
+                                ProductCard(dBarang = it)
+                                Spacer(modifier = Modifier.width(10.dp))
                             }
-
-                            Card(
-                                modifier = Modifier
-                                    .align(Alignment.BottomCenter)
-                                    .fillMaxWidth()
-                                    .height(160.dp)
-                                    .offset(y = (-10).dp), // Offset to move the Card upwards
-                                //elevation = CardDefaults.cardElevation(5.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
-                                Column(
-                                    modifier = Modifier.padding(8.dp)
-                                ) {
-                                    Text(
-                                        text = "Kamera EOS 3000D",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 13.sp,
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Spacer(modifier = Modifier.height(10.dp))
-                                    Row {
-                                        Icon(
-                                            Icons.Default.LocationOn,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(14.dp)
-                                        )
-                                        Text(
-                                            text = "batam",
-                                            fontSize = 12.sp,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = Color.Gray
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(10.dp))
-
-                                    Button(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
-                                        modifier = Modifier
-                                            .size(width = 50.dp, height = 20.dp),
-                                        shape = CircleShape,
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = Color.Cyan
-                                        ),
-                                        contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
-                                    ) {
-                                        Text(
-                                            text = "Hobi",
-                                            fontSize = 12.sp,
-                                            color = Color.Black,
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        repeat(5) {
-                                            Icon(
-                                                Icons.Rounded.StarOutline,
-                                                contentDescription = null,
-                                                tint = Color.Yellow,  // Warna untuk bintang kosong
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
-
-                                        Text(
-                                            text = "Rp125.000/hari",
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 12.sp,
-                                            modifier = Modifier.padding(bottom = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    Spacer(modifier = modifier.width(20.dp))
-
-                    // Tambahkan Card kedua jika diperlukan
-                    Card(
-                        modifier = Modifier
-                            .width(150.dp)
-                            .height(270.dp),
-                        elevation = CardDefaults.cardElevation(10.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
                         )
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Top
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .height(110.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.productfashion),
-                                        contentDescription = "Foto Produk",
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier.fillMaxSize()
-                                    )
-
-                                    IconButton(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat ikon diklik */ },
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(8.dp) // Padding untuk memberikan jarak dari tepi
-                                            .size(24.dp) // Ukuran ikon
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.FavoriteBorder,
-                                            contentDescription = "Love",
-                                            tint = Color.Gray // Warna ikon
-                                        )
-                                    }
-                                }
-                            }
-
-                            Card(
-                                modifier = Modifier
-                                    .align(Alignment.BottomCenter)
-                                    .fillMaxWidth()
-                                    .height(160.dp)
-                                    .offset(y = (-10).dp), // Offset to move the Card upwards
-                                //elevation = CardDefaults.cardElevation(5.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
-                                Column(
-                                    modifier = Modifier.padding(8.dp)
-                                ) {
-                                    Text(
-                                        text = "Kamera EOS 3000D",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 13.sp,
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Spacer(modifier = Modifier.height(10.dp))
-                                    Row {
-                                        Icon(
-                                            Icons.Default.LocationOn,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(14.dp)
-                                        )
-                                        Text(
-                                            text = "Tanjungpinang",
-                                            fontSize = 12.sp,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = Color.Gray
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(10.dp))
-
-                                    Button(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
-                                        modifier = Modifier
-                                            .size(width = 50.dp, height = 20.dp),
-                                        shape = CircleShape,
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = Color.Yellow
-                                        ),
-                                        contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
-                                    ) {
-                                        Text(
-                                            text = "Pakaian",
-                                            fontSize = 12.sp,
-                                            color = Color.Black,
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        repeat(5) {
-                                            Icon(
-                                                Icons.Rounded.StarOutline,
-                                                contentDescription = null,
-                                                tint = Color.Yellow,  // Warna untuk bintang kosong
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
-
-                                        Text(
-                                            text = "Rp100.000/hari",
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 12.sp,
-                                            modifier = Modifier.padding(bottom = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
-
-
-
-
-
-
-
-
-
-
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -533,7 +307,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Paling Banyak DiSewa",
+                        text = "Paling Banyak Disewa",
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
@@ -551,261 +325,18 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Card(
-                        modifier = Modifier
-                            .width(150.dp)
-                            .height(270.dp),
-                        elevation = CardDefaults.cardElevation(10.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
-                        )
+                    val barangs = remember { Data.dataBarangBanyakDisewa }
+                    LazyRow(
                     ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Top
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .height(110.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.productmobil),
-                                        contentDescription = "Foto Produk",
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier.fillMaxSize()
-                                    )
-
-                                    IconButton(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat ikon diklik */ },
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(8.dp) // Padding untuk memberikan jarak dari tepi
-                                            .size(24.dp) // Ukuran ikon
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.FavoriteBorder,
-                                            contentDescription = "Love",
-                                            tint = Color.Gray // Warna ikon
-                                        )
-                                    }
-                                }
+                        items(
+                            items = barangs,
+                            itemContent = {
+                                ProductCard(dBarang = it)
+                                Spacer(modifier = Modifier.width(10.dp))
                             }
-
-                            Card(
-                                modifier = Modifier
-                                    .align(Alignment.BottomCenter)
-                                    .fillMaxWidth()
-                                    .height(160.dp)
-                                    .offset(y = (-10).dp), // Offset to move the Card upwards
-                                //elevation = CardDefaults.cardElevation(5.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
-                                Column(
-                                    modifier = Modifier.padding(8.dp)
-                                ) {
-                                    Text(
-                                        text = "Rental Mobil",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 13.sp,
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Spacer(modifier = Modifier.height(10.dp))
-                                    Row {
-                                        Icon(
-                                            Icons.Default.LocationOn,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(14.dp)
-                                        )
-                                        Text(
-                                            text = "Jakarta",
-                                            fontSize = 12.sp,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = Color.Gray
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(10.dp))
-
-                                    Button(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
-                                        modifier = Modifier
-                                            .size(width = 50.dp, height = 20.dp),
-                                        shape = CircleShape,
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = Color.Cyan
-                                        ),
-                                        contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
-                                    ) {
-                                        Text(
-                                            text = "Kendaraan",
-                                            fontSize = 12.sp,
-                                            color = Color.Black,
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        repeat(5) {
-                                            Icon(
-                                                Icons.Rounded.StarOutline,
-                                                contentDescription = null,
-                                                tint = Color.Yellow,  // Warna untuk bintang kosong
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
-
-                                        Text(
-                                            text = "Rp450.000/hari",
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 12.sp,
-                                            modifier = Modifier.padding(bottom = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // Tambahkan Card kedua jika diperlukan
-                    Card(
-                        modifier = Modifier
-                            .width(150.dp)
-                            .height(270.dp),
-                        elevation = CardDefaults.cardElevation(10.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
                         )
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Top
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .height(110.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.productcampset),
-                                        contentDescription = "Foto Produk",
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier.fillMaxSize()
-                                    )
-
-                                    IconButton(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat ikon diklik */ },
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(8.dp) // Padding untuk memberikan jarak dari tepi
-                                            .size(24.dp) // Ukuran ikon
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.FavoriteBorder,
-                                            contentDescription = "Love",
-                                            tint = Color.Gray // Warna ikon
-                                        )
-                                    }
-                                }
-                            }
-
-                            Card(
-                                modifier = Modifier
-                                    .align(Alignment.BottomCenter)
-                                    .fillMaxWidth()
-                                    .height(160.dp)
-                                    .offset(y = (-10).dp), // Offset to move the Card upwards
-                                //elevation = CardDefaults.cardElevation(5.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
-                                Column(
-                                    modifier = Modifier.padding(8.dp)
-                                ) {
-                                    Text(
-                                        text = "Camp Set",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 13.sp,
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Spacer(modifier = Modifier.height(10.dp))
-                                    Row {
-                                        Icon(
-                                            Icons.Default.LocationOn,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(14.dp)
-                                        )
-                                        Text(
-                                            text = "Hj Unggar City",
-                                            fontSize = 12.sp,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = Color.Gray
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(10.dp))
-
-                                    Button(
-                                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
-                                        modifier = Modifier
-                                            .size(width = 50.dp, height = 20.dp),
-                                        shape = CircleShape,
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = Color.Yellow
-                                        ),
-                                        contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
-                                    ) {
-                                        Text(
-                                            text = "Peralatan",
-                                            fontSize = 12.sp,
-                                            color = Color.Black,
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        repeat(5) {
-                                            Icon(
-                                                Icons.Rounded.StarOutline,
-                                                contentDescription = null,
-                                                tint = Color.Yellow,  // Warna untuk bintang kosong
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
-
-                                        Text(
-                                            text = "Rp250.000/hari",
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 12.sp,
-                                            modifier = Modifier.padding(bottom = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
-
-
                 Spacer(modifier = modifier.height(30.dp))
             }
         }

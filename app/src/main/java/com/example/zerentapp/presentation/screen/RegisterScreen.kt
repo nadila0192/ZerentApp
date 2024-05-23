@@ -63,16 +63,17 @@ fun RegisterScreen(
             Column (
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .padding(top = 15.dp)
                     .fillMaxWidth()
             ) {
+                Spacer(modifier = Modifier.height(60.dp))
                 Image(
-                    painter = painterResource(id = R.drawable.logo_login),
+                    painter = painterResource(id = R.drawable.logofix),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(200.dp),
+                        .size(130.dp),
                     alignment = Alignment.Center
                 )
+                Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     modifier = Modifier
                         .padding(bottom = 10.dp),

@@ -12,19 +12,30 @@ object Data {
     val dataBarang = listOf(
         dBarang(
             id = 1,
-            nama = "Kamera EOS 3000D",
-            harga = "125000",
+            nama = "Kamera EOS 500D",
+            category = "Hobi",
+            harga = "150.000",
             detail = "Menyewakan kamera Canon untuk kebutuhan tugas, hunting foto serta keperluan lainnya.",
             lokasi = "Batam",
-            foto = R.drawable.canon3000d
+            foto = R.drawable.img_2
         ),
         dBarang(
             id = 2,
             nama = "Fighting Nora Costume",
-            harga = "100000",
+            category = "Pakaian",
+            harga = "100.000",
             detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
             lokasi = "Batam",
             foto = R.drawable.nora
+        ),
+        dBarang(
+            id = 3,
+            nama = "Fighting Nora Costume",
+            category = "Hobi",
+            harga = "100.000",
+            detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
+            lokasi = "Batam",
+            foto = R.drawable.canon3000d
         ),
     )
 
@@ -69,5 +80,35 @@ object Data {
             layanan = "50000",
             Total = "225000"
         )
+    )
+
+    val dataBarangBanyakDisewa = listOf(
+        dBarang(
+            id = 1,
+            nama = "Rental Mobil",
+            category = "Kendaraan",
+            harga = "300.000",
+            detail = "Menyewakan kamera Canon untuk kebutuhan tugas, hunting foto serta keperluan lainnya.",
+            lokasi = "Batam",
+            foto = R.drawable.productmobil
+        ),
+        dBarang(
+            id = 2,
+            nama = "Rental Sepeda MTB",
+            category = "Hobi",
+            harga = "100.000",
+            detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
+            lokasi = "Batam",
+            foto = R.drawable.productsepeda
+        ),
+        dBarang(
+            id = 3,
+            nama = "Kamera DSLR",
+            category = "Hobi",
+            harga = "150.000",
+            detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
+            lokasi = "Batam",
+            foto = R.drawable.canon3000d
+        ),
     )
 }

@@ -1,6 +1,7 @@
 package com.example.zerentapp.presentation.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.rounded.Favorite
@@ -40,18 +42,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.zerentapp.R
+import com.example.zerentapp.model.dBarang
+import com.example.zerentapp.ui.theme.color1
+import com.example.zerentapp.ui.theme.colorBintang
 
 @Composable
 fun ProductCard(
-    imageProduct :Int,
-    titleProduct :String,
-    address :String,
-    categoryProduct :String,
-    priceProduct :String,
+    dBarang: dBarang
 ) {
     Card(
         modifier = Modifier
-            .width(150.dp)
+            .width(170.dp)
             .height(270.dp),
         elevation = CardDefaults.cardElevation(10.dp),
         colors = CardDefaults.cardColors(
@@ -62,19 +63,175 @@ fun ProductCard(
             modifier = Modifier.fillMaxSize(),
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Top
-            ) {
+                modifier = Modifier
+                    .fillMaxSize()
+                    .border(
+                        width = 1.dp,
+                        color = Color.DarkGray,
+                        shape = RoundedCornerShape(12.dp)
+                    ),
+                verticalArrangement = Arrangement.Top,
+
+                ) {
                 Box(
                     modifier = Modifier
                         .height(110.dp)
                         .fillMaxWidth()
                 ) {
                     Image(
-                        painter = painterResource(id = imageProduct),
+                        painter = painterResource(id = dBarang.foto),
                         contentDescription = "Foto Produk",
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize(),
+                    )
+
+                    IconButton(
+                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat ikon diklik */ },
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(8.dp) // Padding untuk memberikan jarak dari tepi
+                            .size(24.dp) // Ukuran ikon
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.FavoriteBorder,
+                            contentDescription = "Love",
+                            tint = Color.White // Warna ikon
+                        )
+                    }
+                }
+            }
+
+            Card(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .width(168.dp)
+                    .height(160.dp)
+                    .offset(y = (-10).dp), // Offset to move the Card upwards
+                //elevation = CardDefaults.cardElevation(5.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(10.dp)
+                ) {
+                    Text(
+                        text = dBarang.nama,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row (
+                        horizontalArrangement = Arrangement.Center
+                    ){
+                        Icon(
+                            Icons.Default.LocationOn,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(15.dp),
+                            tint = color1,
+                        )
+                        Spacer(modifier = Modifier.width(2.dp))
+                        Text(
+                            text = dBarang.lokasi,
+                            fontSize = 12.sp,
+                            overflow = TextOverflow.Ellipsis,
+                            color = Color.DarkGray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    Button(
+                        onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
+                        modifier = Modifier
+                            .size(width = 50.dp, height = 20.dp),
+                        shape = CircleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Cyan
+                        ),
+                        contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
+                    ) {
+                        Text(
+                            text = dBarang.category,
+                            fontSize = 10.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Row {
+                            repeat(5) {
+                                Icon(
+                                    Icons.Rounded.StarOutline,
+                                    contentDescription = null,
+                                    tint = colorBintang,  // Warna untuk bintang kosong
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(14.dp))
+                        Text(
+                            text = "Rp${dBarang.harga}/hari",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding()
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProductWhislist(
+    dBarang: dBarang
+) {
+    Card(
+        modifier = Modifier
+            .width(170.dp)
+            .height(270.dp),
+        elevation = CardDefaults.cardElevation(10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .border(
+                        width = 1.dp,
+                        color = Color.DarkGray,
+                        shape = RoundedCornerShape(12.dp)
+                    ),
+                verticalArrangement = Arrangement.Top,
+
+                ) {
+                Box(
+                    modifier = Modifier
+                        .height(110.dp)
+                        .fillMaxWidth()
+                ) {
+                    Image(
+                        painter = painterResource(id = dBarang.foto),
+                        contentDescription = "Foto Produk",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize(),
                     )
 
                     IconButton(
@@ -96,7 +253,7 @@ fun ProductCard(
             Card(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
+                    .width(168.dp)
                     .height(160.dp)
                     .offset(y = (-10).dp), // Offset to move the Card upwards
                 //elevation = CardDefaults.cardElevation(5.dp),
@@ -105,30 +262,35 @@ fun ProductCard(
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(10.dp)
                 ) {
                     Text(
-                        text = titleProduct,
+                        text = dBarang.nama,
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Row {
+                    Row (
+                        horizontalArrangement = Arrangement.Center
+                    ){
                         Icon(
                             Icons.Default.LocationOn,
                             contentDescription = null,
-                            modifier = Modifier.size(14.dp)
+                            modifier = Modifier
+                                .size(15.dp),
+                            tint = color1,
                         )
+                        Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = address,
+                            text = dBarang.lokasi,
                             fontSize = 12.sp,
                             overflow = TextOverflow.Ellipsis,
-                            color = Color.Gray
+                            color = Color.DarkGray
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(15.dp))
 
                     Button(
                         onClick = { /* Tambahkan aksi yang ingin dilakukan saat button diklik */ },
@@ -141,8 +303,8 @@ fun ProductCard(
                         contentPadding = PaddingValues(0.dp) // Atur padding untuk memastikan teks berada di tengah
                     ) {
                         Text(
-                            text = categoryProduct,
-                            fontSize = 12.sp,
+                            text = dBarang.category,
+                            fontSize = 10.sp,
                             color = Color.Black,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.fillMaxSize(), // Mengatur teks agar memenuhi button dan tetap center
@@ -151,23 +313,27 @@ fun ProductCard(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
                     ) {
-                        repeat(5) {
-                            Icon(
-                                Icons.Rounded.StarOutline,
-                                contentDescription = null,
-                                tint = Color.Yellow,  // Warna untuk bintang kosong
-                                modifier = Modifier.size(16.dp)
-                            )
+                        Row {
+                            repeat(5) {
+                                Icon(
+                                    Icons.Rounded.StarOutline,
+                                    contentDescription = null,
+                                    tint = colorBintang,  // Warna untuk bintang kosong
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
                         }
 
+                        Spacer(modifier = Modifier.height(14.dp))
                         Text(
-                            text = "Rp$priceProduct/Hari",
+                            text = "Rp${dBarang.harga}/hari",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp,
-                            modifier = Modifier.padding(bottom = 4.dp)
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding()
                         )
                     }
                 }
@@ -180,5 +346,15 @@ fun ProductCard(
 @Preview (showBackground = true)
 @Composable
 private fun productCardPrev() {
-    ProductCard(imageProduct = R.drawable.productcamera, titleProduct = "Kamera Canon 600D", address = "Batam", categoryProduct = "Hobi", priceProduct = "200.000")
+    ProductCard(dBarang = dBarang(
+        0,
+        "Kamera EOS 3000D",
+        "Hobi",
+        "125000",
+        "Rental cosplay costume mu dengan mudah dan cepat disini.",
+        "Batam",
+        R.drawable.canon3000d
+
+    ))
 }
+
