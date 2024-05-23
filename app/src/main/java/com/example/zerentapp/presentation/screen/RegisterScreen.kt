@@ -150,7 +150,7 @@ fun RegisterScreen(
                     )
                     Spacer(modifier = Modifier.height(18.dp))
                     Button(
-                        onClick = { navController.navigate("home")},
+                        onClick = { navController.navigate("verifemail")},
                         colors = ButtonDefaults.buttonColors(
                             containerColor = color1
                         ),

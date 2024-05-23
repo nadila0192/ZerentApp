@@ -18,15 +18,6 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             ZerentAppTheme {
-
-//                val navController = rememberNavController()
-//                NavHost(navController = navController, startDestination = "onboarding") {
-//                    composable("onboarding") { OnBoardingScreen(navController = navController) }
-//                    composable("home") { HomeScreen(navController) }
-
-
-                    //OnBoardingScreen()
-
                     ZerentApp()
 
                 }

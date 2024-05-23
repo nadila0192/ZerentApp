@@ -199,7 +199,7 @@ fun LoginScreen(
                         text = "Sign Up",
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Start,
-                        fontFamily = poppinsFontFamily, fontWeight = FontWeight.Normal,
+                        fontFamily = poppinsFontFamily, fontWeight = FontWeight.Bold,
                         color = Color.Black,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier
@@ -235,7 +235,6 @@ fun LoginScreen(
 fun LoginScreenPreview(){
     ZerentAppTheme {
         LoginScreen(navController = rememberNavController())
-        
     }
 }
 

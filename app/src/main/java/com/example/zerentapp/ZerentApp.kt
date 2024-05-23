@@ -45,6 +45,7 @@ import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.LoginScreen
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.RegisterScreen
+import com.example.zerentapp.presentation.screen.VerifEmail
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -64,6 +65,9 @@ fun ZerentApp(
             }
             composable(Screen.Register.route){
                 RegisterScreen(navController)
+            }
+            composable(Screen.VerifikasiEmail.route){
+                VerifEmail(navController)
             }
             composable(Screen.Home.route){
                 HomeScreen(navController)
