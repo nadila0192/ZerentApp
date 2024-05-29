@@ -1,4 +1,4 @@
-package com.example.zerentapp.component
+package com.example.zerentapp.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -13,7 +13,6 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarHalf
 import androidx.compose.material.icons.rounded.StarOutline
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

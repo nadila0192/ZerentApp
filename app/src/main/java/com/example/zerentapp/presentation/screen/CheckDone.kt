@@ -1,4 +1,4 @@
-package com.example.zerentapp.screen
+package com.example.zerentapp.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -34,7 +34,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,7 +43,6 @@ import com.example.zerentapp.R
 import com.example.zerentapp.data.Data
 import com.example.zerentapp.model.dCheck
 import com.example.zerentapp.model.dPembayaran
-import com.example.zerentapp.ui.theme.bordersuccess
 import com.example.zerentapp.ui.theme.cardFill1
 import com.example.zerentapp.ui.theme.cardStroke1
 import com.example.zerentapp.ui.theme.mainn

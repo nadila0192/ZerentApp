@@ -3,11 +3,9 @@ package com.example.zerentapp.presentation.screen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -16,22 +14,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.zerentapp.R
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.data.Data
-import com.example.zerentapp.presentation.component.ProductCard
 import com.example.zerentapp.presentation.component.ProductWhislist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun WishlistScreen() { // Use WishlistScreen for clarity
+fun WhishlistScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) { // Use WishlistScreen for clarity
     Scaffold(
         topBar = {
             TopAppBar(
@@ -40,7 +36,11 @@ fun WishlistScreen() { // Use WishlistScreen for clarity
                         modifier = Modifier.width(360.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        com.example.zerentapp.presentation.component.SearchBar(modifier = Modifier.padding(16.dp))
+                        com.example.zerentapp.presentation.component.SearchBar(
+                            modifier = Modifier.padding(
+                                16.dp
+                            )
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -255,6 +255,6 @@ fun WishlistScreen() { // Use WishlistScreen for clarity
 @Preview(showBackground = true)
 @Composable
 fun WishlistScreenPreview() {
-    WishlistScreen()
+    WhishlistScreen(navController = rememberNavController())
 }
 
