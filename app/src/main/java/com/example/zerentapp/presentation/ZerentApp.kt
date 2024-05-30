@@ -2,28 +2,37 @@ package com.example.zerentapp.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BrowseGallery
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Topic
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.zerentapp.R
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.presentation.screen.HomeScreen
@@ -104,9 +113,11 @@ fun ZerentApp(
 @Composable
 fun BottomBar(
     navController: NavHostController,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = Color(0xff043C5B)) {
 
-    NavigationBar (modifier = modifier){
+    NavigationBar (modifier = modifier.height(50.dp),
+        containerColor = backgroundColor){
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -114,27 +125,32 @@ fun BottomBar(
         val navigationItems = listOf(
             NavigationItem(
                 title = "Home",
-                icon = Icons.Default.Home,
+                icon = R.drawable.ic_home,
+                iconSelected = R.drawable.ic_selected_home,
                 screen = Screen.Home
             ),
             NavigationItem(
                 title = "Request",
-                icon = Icons.Default.BrowseGallery,
+                icon = R.drawable.ic_request,
+                iconSelected = R.drawable.ic_selected_request,
                 screen = Screen.Request
             ),
             NavigationItem(
                 title = "Whishlist",
-                icon = Icons.Default.Topic,
+                icon = R.drawable.ic_whishlist,
+                iconSelected = R.drawable.ic_selected_whishlist,
                 screen = Screen.Whishlist
             ),
             NavigationItem(
                 title = "Order",
-                icon = Icons.Default.Movie,
+                icon = R.drawable.ic_order,
+                iconSelected = R.drawable.ic_selected_order,
                 screen = Screen.Order
             ),
             NavigationItem(
                 title = "Profile",
-                icon = Icons.Default.Movie,
+                icon = R.drawable.ic_profile,
+                iconSelected = R.drawable.ic_selected_profile,
                 screen = Screen.About
             )
         )
@@ -150,8 +166,20 @@ fun BottomBar(
                         launchSingleTop = true
                     }
                 },
-                icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
-                label = { Text(text = item.title) }
+                icon = {
+                    val iconRes = if (currentRoute == item.screen.route) item.iconSelected else item.icon
+                    Icon(painterResource(id  = iconRes),
+                    contentDescription = item.title,
+                    modifier.size(30.dp)
+                    ) },
+
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Color.Unspecified,
+                    unselectedIconColor = Color.Unspecified,
+                    selectedTextColor = Color.Unspecified,
+                    unselectedTextColor = Color.Unspecified,
+                    indicatorColor = Color(0xff043C5B)
+                )
             )
         }
     }
