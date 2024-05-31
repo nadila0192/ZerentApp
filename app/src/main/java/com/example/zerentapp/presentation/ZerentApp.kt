@@ -1,5 +1,6 @@
 package com.example.zerentapp.presentation
 
+import Order
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.padding
@@ -29,7 +30,6 @@ import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.LoginScreen
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
-import com.example.zerentapp.presentation.screen.Order
 import com.example.zerentapp.presentation.screen.ProfileScreen
 import com.example.zerentapp.presentation.screen.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
@@ -90,7 +90,7 @@ fun ZerentApp(
                 WhishlistScreen(navController)
             }
             composable(Screen.Order.route){
-                Order(navController)
+                Order()
             }
             composable(Screen.About.route){
                 ProfileScreen(navController)

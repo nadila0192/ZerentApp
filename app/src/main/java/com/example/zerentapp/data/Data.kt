@@ -3,6 +3,8 @@ package com.example.zerentapp.data
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.zerentapp.R
+import com.example.zerentapp.model.Barang
+import com.example.zerentapp.model.Status
 import com.example.zerentapp.model.dBarang
 import com.example.zerentapp.model.dCheck
 import com.example.zerentapp.model.dPembayaran
@@ -110,5 +112,25 @@ object Data {
             lokasi = "Batam",
             foto = R.drawable.canon3000d
         ),
+    )
+    val sampleStatus = listOf(
+        Status(
+            "Belum Bayar", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2)
+            )
+        ),
+        Status(
+            "Di Proses", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img)
+            )
+        ),
+        Status(
+            "Digunakan", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img)
+            )
+        )
     )
 }
