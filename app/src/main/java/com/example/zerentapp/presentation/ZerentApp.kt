@@ -28,7 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.presentation.screen.HomeScreen
-import com.example.zerentapp.presentation.screen.LoginScreen
+import com.example.zerentapp.presentation.screen.Login.Login
+import com.example.zerentapp.presentation.screen.Login.LoginScreen
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
 import com.example.zerentapp.presentation.screen.RegisterScreen
@@ -71,7 +72,7 @@ fun ZerentApp(
                 OnBoardingScreen(navController)
             }
             composable(Screen.Login.route){
-                LoginScreen(navController)
+                Login(navController)
             }
             composable(Screen.Register.route){
                 RegisterScreen(navController)

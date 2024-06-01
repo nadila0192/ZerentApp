@@ -7,7 +7,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.zerentapp.presentation.ZerentApp
 
 import com.example.zerentapp.ui.theme.ZerentAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
