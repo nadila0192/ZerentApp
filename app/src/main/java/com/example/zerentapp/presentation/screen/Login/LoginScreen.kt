@@ -26,6 +26,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,7 +63,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.zerentapp.navigation.Screen
+import com.example.zerentapp.utils.Constant.CLIENT
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
@@ -80,7 +83,7 @@ fun Login(
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
     var isRegistering by remember { mutableStateOf(false) }
-    //val googleLoginState = viewModel.stateGoogle.value
+    val googleLoginState = viewModel.stateGoogle.value
 
     @Suppress("DEPRECATION")
     val launcher =
@@ -138,16 +141,16 @@ fun Login(
                     Toast.LENGTH_SHORT
                 ).show()
             },
-//            onGoogleClick = {
-//                val googleLogin = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                    .requestEmail()
-//                    .requestIdToken(CLIENT)
-//                    .build()
-//
-//                @Suppress("DEPRECATION")
-//                val googleLoginClient = GoogleSignIn.getClient(context, googleLogin)
-//                launcher.launch(googleLoginClient.signInIntent)
-//            },
+            onGoogleClick = {
+                val googleLogin = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestIdToken(CLIENT)
+                    .build()
+
+                @Suppress("DEPRECATION")
+                val googleLoginClient = GoogleSignIn.getClient(context, googleLogin)
+                launcher.launch(googleLoginClient.signInIntent)
+            },
             onRegisterClick = {
                 coroutineScope.launch {
                     if (email.isBlank() || password.isBlank()) {
@@ -197,13 +200,13 @@ fun Login(
                 }
             }
         }
-//        LaunchedEffect(key1 = googleLoginState.success) {
-//            coroutineScope.launch {
-//                if (googleLoginState.success != null) {
-//                    Toast.makeText(context, "Login With Google Success", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
+        LaunchedEffect(key1 = googleLoginState.success) {
+            coroutineScope.launch {
+                if (googleLoginState.success != null) {
+                    Toast.makeText(context, "Login With Google Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }
 @Composable
@@ -216,7 +219,7 @@ fun LoginScreen(
     onPasswordConfirmChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     moveToForgot: () -> Unit,
-    //onGoogleClick: () -> Unit,
+    onGoogleClick: () -> Unit,
     onRegisterClick: () -> Unit,
     toggleAuthMode: () -> Unit,
     isRegistering: Boolean,
@@ -323,12 +326,25 @@ fun LoginScreen(
                             .background(Color.White),
                         contentAlignment = Alignment.Center
                     ){
-                        Image(
+                        OutlinedButton(
+                            onClick = onGoogleClick,
+                            shape = MaterialTheme.shapes.large,
+                            modifier = modifier.fillMaxWidth()
+                        ) {
+                            Image(
                             modifier = Modifier
                                 .size(40.dp),
                             painter = painterResource(id = R.drawable.logogoogle),
                             contentDescription =null,
                         )
+                        }
+//                        Image(
+//                            onClick = onGoogleClick,
+//                            modifier = Modifier
+//                                .size(40.dp),
+//                            painter = painterResource(id = R.drawable.logogoogle),
+//                            contentDescription =null,
+//                        )
                     }
                     Spacer(modifier = Modifier.width(19.dp))
                     Box (
