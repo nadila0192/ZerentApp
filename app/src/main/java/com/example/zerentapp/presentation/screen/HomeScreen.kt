@@ -94,7 +94,7 @@ fun HomeScreen(
 
                 SearchBar(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth(),""
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))

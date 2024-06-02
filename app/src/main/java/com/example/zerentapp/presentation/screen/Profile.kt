@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -58,12 +59,17 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .offset(y = (-80).dp)
+
             ) {
                 Card(
                     modifier = Modifier
                         .padding(top = 0.dp, start = 20.dp, end = 20.dp, bottom = 20.dp)
                         .clip(shape = RoundedCornerShape(18.dp))  // Clip to the same shape as the border
-                        .border(width = 2.dp, color = Color.Gray, shape = RoundedCornerShape(18.dp))
+                        .border(
+                            width = 2.dp,
+                            color = Color(0xFFDBE5EB),
+                            shape = RoundedCornerShape(18.dp)
+                        )
                         .fillMaxSize(),
                     elevation = CardDefaults.cardElevation(10.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White) // Change the color as needed
@@ -110,7 +116,8 @@ fun ProfileScreen(
 
                         Spacer(modifier = Modifier.height(100.dp))
 
-                        Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier.fillMaxWidth()
+                            .clickable { navController.navigate("profilesetting") }) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -145,7 +152,8 @@ fun ProfileScreen(
 
 
 
-                        Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier.fillMaxWidth()
+                        ) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -182,7 +190,8 @@ fun ProfileScreen(
 
 
 
-                        Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier.fillMaxWidth()
+                            .clickable { navController.navigate("bantuan") }) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -213,8 +222,34 @@ fun ProfileScreen(
                         }
 
                     }
+
+
+
                 }
+
+                //box tambahan
+//                Box( modifier = Modifier
+//                    .fillMaxSize()
+//                    .offset(y = (600).dp)){
+//
+//                    Card (modifier = Modifier
+//                        .padding(top = 0.dp, start = 20.dp, end = 20.dp, bottom = 20.dp)
+//                        .clip(shape = RoundedCornerShape(18.dp))  // Clip to the same shape as the border
+//                        .border(width = 2.dp, color = Color(0xFFDBE5EB), shape = RoundedCornerShape(18.dp))
+//                        .fillMaxWidth()
+//                        .height(200.dp),
+//                        elevation = CardDefaults.cardElevation(10.dp),
+//                        colors = CardDefaults.cardColors(containerColor = Color.White) // Change the color as needed
+//
+//                    ){
+//
+//                    }
+//                }
             }
+
+
+
+
         }
     }
 }

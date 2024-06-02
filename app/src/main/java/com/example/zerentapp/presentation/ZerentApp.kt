@@ -5,19 +5,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BrowseGallery
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Movie
-import androidx.compose.material.icons.filled.Topic
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -35,11 +27,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.R
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
+import com.example.zerentapp.presentation.screen.BantuanScreen
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.LoginScreen
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.Order
 import com.example.zerentapp.presentation.screen.ProfileScreen
+import com.example.zerentapp.presentation.screen.ProfileSetting
 import com.example.zerentapp.presentation.screen.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.VerifEmail
@@ -103,6 +97,12 @@ fun ZerentApp(
             }
             composable(Screen.About.route){
                 ProfileScreen(navController)
+            }
+            composable(Screen.ProfileSetting.route){
+                ProfileSetting(navController)
+            }
+            composable(Screen.Bantuan.route){
+                BantuanScreen(navController)
             }
         }
 
