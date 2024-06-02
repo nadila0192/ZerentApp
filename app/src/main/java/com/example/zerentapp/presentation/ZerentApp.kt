@@ -29,10 +29,10 @@ import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.Login.Login
-import com.example.zerentapp.presentation.screen.Login.LoginScreen
+import com.example.zerentapp.presentation.screen.Login.Register
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
-import com.example.zerentapp.presentation.screen.RegisterScreen
+import com.example.zerentapp.presentation.screen.Login.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.VerifEmail
 import com.example.zerentapp.presentation.screen.WhishlistScreen
@@ -75,7 +75,7 @@ fun ZerentApp(
                 Login(navController)
             }
             composable(Screen.Register.route){
-                RegisterScreen(navController)
+                Register(navController)
             }
             composable(Screen.VerifikasiEmail.route){
                 VerifEmail(navController)

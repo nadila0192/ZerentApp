@@ -1,5 +1,8 @@
-package com.example.zerentapp.presentation.screen
+package com.example.zerentapp.presentation.screen.Login
 
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,10 +31,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -40,16 +51,131 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.R
+import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.ui.theme.BackgroungLogin
 import com.example.zerentapp.ui.theme.ZerentAppTheme
 import com.example.zerentapp.ui.theme.color1
 import com.example.zerentapp.ui.theme.poppinsFontFamily
+import com.example.zerentapp.utils.Constant
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.launch
+
 
 @Composable
+fun Register(
+    navController: NavController,
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val state = viewModel.state.collectAsState(initial = null)
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
+    var isRegistering by remember { mutableStateOf(false) }
+    val googleLoginState = viewModel.stateGoogle.value
+
+    @Suppress("DEPRECATION")
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
+            val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val result = account.getResult(ApiException::class.java)
+                val credential = GoogleAuthProvider.getCredential(result.idToken, null)
+                viewModel.loginWithGoogle(credential) {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Login.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            } catch (it: ApiException) {
+                Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        RegisterScreen(
+            email = email,
+            password = password,
+            passwordConfirm = passwordConfirm,
+            onEmailChange = { email = it },
+            onPasswordChange = { password = it },
+            onPasswordConfirmChange = { passwordConfirm = it },
+            onRegisterClick = {
+                coroutineScope.launch {
+                    if (email.isBlank() || password.isBlank()) {
+                        Toast.makeText(
+                            context,
+                            "Email dan Password Wajib Diisi",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    } else if (password != passwordConfirm) {
+                        Toast.makeText(
+                            context,
+                            "Password dan Konfirmasi Password tidak cocok",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        viewModel.registerUser(email, password) {
+                            navController.navigate(Screen.VerifikasiEmail.route) {
+                                popUpTo(Screen.Login.route) { inclusive = true }
+                            }
+                            email = ""
+                            password = ""
+                            passwordConfirm = ""
+                        }
+                    }
+                }
+            },
+
+            modifier = modifier,
+            navController = navController
+        )
+        LaunchedEffect(key1 = state.value?.success) {
+            coroutineScope.launch {
+                if (state.value?.success?.isNotEmpty() == true) {
+                    val success = state.value?.success
+                    Toast.makeText(context, "$success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        LaunchedEffect(key1 = state.value?.error) {
+            coroutineScope.launch {
+                if (state.value?.error?.isNotEmpty() == true) {
+                    val error = state.value?.error
+                    Toast.makeText(context, "$error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        LaunchedEffect(key1 = googleLoginState.success) {
+            coroutineScope.launch {
+                if (googleLoginState.success != null) {
+                    Toast.makeText(context, "Login With Google Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+}
+@Composable
 fun RegisterScreen(
+    email: String,
+    password: String,
+    passwordConfirm: String,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit,
+    onRegisterClick: () -> Unit,
+    modifier: Modifier = Modifier,
     navController: NavController
 ){
     BackgroungLogin (
@@ -106,8 +232,8 @@ fun RegisterScreen(
                             .size(width = 310.dp, height = 65.dp)
                     )
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = email,
+                        onValueChange = onEmailChange,
                         label = { Text(text = "Masukkan Email") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Email , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -117,8 +243,8 @@ fun RegisterScreen(
                             .size(width = 310.dp, height = 65.dp)
                     )
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = password,
+                        onValueChange = onPasswordChange,
                         label = { Text(text = "Password") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Lock , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -128,8 +254,8 @@ fun RegisterScreen(
                             .size(width = 310.dp, height = 65.dp)
                     )
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = passwordConfirm,
+                        onValueChange = onPasswordConfirmChange,
                         label = { Text(text = "Masukkan Ulang Password") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Lock , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -151,7 +277,7 @@ fun RegisterScreen(
                     )
                     Spacer(modifier = Modifier.height(18.dp))
                     Button(
-                        onClick = { navController.navigate("verifemail")},
+                        onClick = onRegisterClick,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = color1
                         ),
@@ -263,10 +389,10 @@ fun RegisterScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RegisterScreenPreview(){
-    ZerentAppTheme {
-        RegisterScreen(navController = rememberNavController())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun RegisterScreenPreview(){
+//    ZerentAppTheme {
+//        RegisterScreen(navController = rememberNavController())
+//    }
+//}
