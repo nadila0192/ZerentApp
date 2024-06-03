@@ -36,6 +36,7 @@ import com.example.zerentapp.presentation.screen.ProfileScreen
 import com.example.zerentapp.presentation.screen.ProfileSetting
 import com.example.zerentapp.presentation.screen.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
+import com.example.zerentapp.presentation.screen.TokoScreen
 import com.example.zerentapp.presentation.screen.VerifEmail
 import com.example.zerentapp.presentation.screen.WhishlistScreen
 import com.example.zerentapp.utils.shouldShowBottomBar
@@ -103,6 +104,9 @@ fun ZerentApp(
             }
             composable(Screen.Bantuan.route){
                 BantuanScreen(navController)
+            }
+            composable(Screen.Toko.route){
+                TokoScreen(navController)
             }
         }
 

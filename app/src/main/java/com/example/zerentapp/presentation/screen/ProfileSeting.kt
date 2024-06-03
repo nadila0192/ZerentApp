@@ -288,7 +288,8 @@ fun ProfileSetting(navController: NavController,
                         modifier = Modifier.width(300.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF043C5B)
-                        )) {
+                        ),
+                        shape = RoundedCornerShape(10.dp)) {
                         Text(text = "SIMPAN")
                     }
                 }

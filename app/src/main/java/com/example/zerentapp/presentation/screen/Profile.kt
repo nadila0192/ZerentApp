@@ -116,7 +116,8 @@ fun ProfileScreen(
 
                         Spacer(modifier = Modifier.height(100.dp))
 
-                        Box(modifier = Modifier.fillMaxWidth()
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
                             .clickable { navController.navigate("profilesetting") }) {
                             Row(
                                 modifier = Modifier
@@ -153,6 +154,7 @@ fun ProfileScreen(
 
 
                         Box(modifier = Modifier.fillMaxWidth()
+                            .clickable { navController.navigate("toko") }
                         ) {
                             Row(
                                 modifier = Modifier
@@ -190,7 +192,8 @@ fun ProfileScreen(
 
 
 
-                        Box(modifier = Modifier.fillMaxWidth()
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
                             .clickable { navController.navigate("bantuan") }) {
                             Row(
                                 modifier = Modifier
@@ -221,10 +224,13 @@ fun ProfileScreen(
                             )
                         }
 
+
+
+
                     }
 
 
-
+                    
                 }
 
                 //box tambahan
