@@ -116,21 +116,43 @@ object Data {
     val sampleStatus = listOf(
         Status(
             "Belum Bayar", listOf(
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1),
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1),
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2)
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang")
             )
         ),
         Status(
             "Di Proses", listOf(
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2),
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img)
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img, R.drawable.nora,"Serba Ada","Bayar Sekarang")
             )
         ),
         Status(
             "Digunakan", listOf(
-                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img)
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img, R.drawable.nora, "Serba Ada","Bayar Sekarang")
             )
-        )
+        ),
+        Status(
+            "Pengembalian", listOf(
+                Barang("Kamera EOS 500Dx", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
+        Status(
+            "Kerusakan", listOf(
+
+            )
+        ),
+        Status(
+            "Selesai", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
     )
+
+
+
+
+
 }

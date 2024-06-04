@@ -100,7 +100,7 @@ fun ZerentApp(
                 WhishlistScreen(navController)
             }
             composable(Screen.Order.route){
-                Order()
+                Order(navController)
             }
             composable(Screen.About.route){
                 ProfileScreen(navController)
