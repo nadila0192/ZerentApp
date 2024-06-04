@@ -323,29 +323,18 @@ fun LoginScreen(
                                 shape = RoundedCornerShape(10.dp)
                             )
                             .size(40.dp)
-                            .background(Color.White),
+                            .background(Color.White)
+                        .clickable(onClick = onGoogleClick),
                         contentAlignment = Alignment.Center
                     ){
-                        OutlinedButton(
-                            onClick = onGoogleClick,
-                            shape = MaterialTheme.shapes.large,
-                            modifier = modifier.fillMaxWidth()
-                        ) {
                             Image(
-                            modifier = Modifier
-                                .size(40.dp),
-                            painter = painterResource(id = R.drawable.logogoogle),
-                            contentDescription =null,
-                        )
-                        }
-//                        Image(
-//                            onClick = onGoogleClick,
-//                            modifier = Modifier
-//                                .size(40.dp),
-//                            painter = painterResource(id = R.drawable.logogoogle),
-//                            contentDescription =null,
-//                        )
-                    }
+                                modifier = Modifier
+                                    .size(40.dp),
+                                painter = painterResource(id = R.drawable.logogoogle),
+                                contentDescription =null,
+                            )
+//                        }
+                }
                     Spacer(modifier = Modifier.width(19.dp))
                     Box (
                         modifier = Modifier
