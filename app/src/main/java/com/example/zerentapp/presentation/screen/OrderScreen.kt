@@ -66,7 +66,7 @@ fun StatusScreen(status: MutableState<Status>) {
         color = Color(0xFF043C5B),
         modifier = Modifier
             .padding(start = 50.dp)
-            .padding(top = 15.dp)
+            .padding(top = 10.dp)
 
 
 
@@ -76,7 +76,7 @@ fun StatusScreen(status: MutableState<Status>) {
     Column(modifier = Modifier
         .padding(top = 15.dp)
         .width(800.dp)
-        .offset(y = 65.dp,)
+        .offset(y = 40.dp,)
         .height(60.dp)
         .size(390.dp)
         .clip(RoundedCornerShape(5.dp))
@@ -89,7 +89,7 @@ fun StatusScreen(status: MutableState<Status>) {
     SearchBar(
         modifier = Modifier
             .fillMaxWidth()
-            .offset(y = if (active) 1.dp else 150.dp,)
+            .offset(y = if (active) 1.dp else 125.dp,)
             .clickable {
 
                 active = !active
@@ -172,7 +172,7 @@ fun StatusSelection(statusList: List<Status>, currentStatus: MutableState<Status
                     contentPadding = PaddingValues(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
-                        .padding(top = 60.dp, )
+                        .padding(top = 30.dp, )
 
                 ) {
 
@@ -228,13 +228,13 @@ fun StatusSection(status: Status) {
             .padding(vertical = 8.dp)
 
     ) {
-        Text(
-            modifier = Modifier
-                .padding(bottom = 17.dp)
-            ,
-            text = status.name,
-            style = MaterialTheme.typography.headlineSmall
-        )
+//        Text(
+//            modifier = Modifier
+//                .padding(bottom = 17.dp)
+//            ,
+//            text = status.name,
+//            style = MaterialTheme.typography.headlineSmall
+//        )
         LazyColumn {
             items(status.items  ) { barang ->
                 BarangCard(barang = barang)
