@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730363290241",
+    "project_id": "zerentapp",
+    "storage_bucket": "zerentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730363290241:android:914f0eab414344cd74e380",
+        "android_client_info": {
+          "package_name": "com.example.zerentapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy0h_Um0j7gj-WfdH8xUF-Q-VLfEa8Y8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
