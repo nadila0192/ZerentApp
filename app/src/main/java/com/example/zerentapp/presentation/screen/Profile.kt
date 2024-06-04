@@ -54,16 +54,14 @@ fun ProfileScreen(
             ) {
                 // Your Row content goes here
             }
-
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .offset(y = (-80).dp)
-
+                    .fillMaxWidth()
+                    .offset(y = (-80).dp),
             ) {
                 Card(
                     modifier = Modifier
-                        .padding(top = 0.dp, start = 20.dp, end = 20.dp, bottom = 20.dp)
+                        .padding(top = 0.dp, start = 20.dp, end = 20.dp)
                         .clip(shape = RoundedCornerShape(18.dp))  // Clip to the same shape as the border
                         .border(
                             width = 2.dp,

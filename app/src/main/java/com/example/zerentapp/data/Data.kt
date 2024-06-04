@@ -3,6 +3,8 @@ package com.example.zerentapp.data
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.zerentapp.R
+import com.example.zerentapp.model.Barang
+import com.example.zerentapp.model.Status
 import com.example.zerentapp.model.dBarang
 import com.example.zerentapp.model.dCheck
 import com.example.zerentapp.model.dPembayaran
@@ -29,13 +31,22 @@ object Data {
             foto = R.drawable.nora
         ),
         dBarang(
-            id = 3,
-            nama = "Fighting Nora Costume",
+            id = 4,
+            nama = "Rental Mobil",
+            category = "Kendaraan",
+            harga = "300.000",
+            detail = "Menyewakan kamera Canon untuk kebutuhan tugas, hunting foto serta keperluan lainnya.",
+            lokasi = "Batam",
+            foto = R.drawable.productmobil
+        ),
+        dBarang(
+            id = 5,
+            nama = "Rental Sepeda MTB",
             category = "Hobi",
             harga = "100.000",
             detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
             lokasi = "Batam",
-            foto = R.drawable.canon3000d
+            foto = R.drawable.productsepeda
         ),
     )
 
@@ -111,4 +122,46 @@ object Data {
             foto = R.drawable.canon3000d
         ),
     )
+    val sampleStatus = listOf(
+        Status(
+            "Belum Bayar", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
+        Status(
+            "Di Proses", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img, R.drawable.nora,"Serba Ada","Bayar Sekarang")
+            )
+        ),
+        Status(
+            "Digunakan", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
+        Status(
+            "Pengembalian", listOf(
+                Barang("Kamera EOS 500Dx", "Menyewakan kamera Canon untuk kebutuhan tugas", "150.000",2,R.drawable.img, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
+        Status(
+            "Kerusakan", listOf(
+
+            )
+        ),
+        Status(
+            "Selesai", listOf(
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_1, R.drawable.nora, "Serba Ada","Bayar Sekarang"),
+                Barang("Kamera EOS 500D", "Menyewakan kamera Canon untuk kebutuhan tugas","150.000",2, R.drawable.img_2, R.drawable.nora, "Serba Ada","Bayar Sekarang")
+            )
+        ),
+    )
+
+
+
+
+
 }

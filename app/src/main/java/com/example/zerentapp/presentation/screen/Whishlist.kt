@@ -38,6 +38,8 @@ fun WhishlistScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         SearchBar(
+                        com.example.zerentapp.presentation.component.SearchBar(
+                            navController = navController,
                             modifier = Modifier.padding(
                                 16.dp
                             ),""
@@ -61,13 +63,6 @@ fun WhishlistScreen(
                     bottom = 16.dp
                 )
         ) {
-
-
-
-
-
-
-
             // Stacked product cards with rounded corners
             Column(
                 modifier = Modifier.fillMaxSize(),

@@ -1,5 +1,6 @@
 package com.example.zerentapp.presentation
 
+import Order
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.height
@@ -20,23 +21,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.zerentapp.R
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
+
 import com.example.zerentapp.presentation.screen.BantuanScreen
+
+import com.example.zerentapp.presentation.screen.Check
+import com.example.zerentapp.presentation.screen.CheckDone
+import com.example.zerentapp.presentation.screen.CheckScreen
+import com.example.zerentapp.presentation.screen.DetailScreen
+
 import com.example.zerentapp.presentation.screen.HomeScreen
-import com.example.zerentapp.presentation.screen.LoginScreen
+import com.example.zerentapp.presentation.screen.Login.Login
+import com.example.zerentapp.presentation.screen.Login.Register
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
-import com.example.zerentapp.presentation.screen.Order
 import com.example.zerentapp.presentation.screen.ProfileScreen
+
 import com.example.zerentapp.presentation.screen.ProfileSetting
 import com.example.zerentapp.presentation.screen.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.TokoScreen
+
+import com.example.zerentapp.presentation.screen.RequestScreen
+import com.example.zerentapp.presentation.screen.ResultScreen
+
 import com.example.zerentapp.presentation.screen.VerifEmail
 import com.example.zerentapp.presentation.screen.WhishlistScreen
 import com.example.zerentapp.utils.shouldShowBottomBar
@@ -75,10 +90,10 @@ fun ZerentApp(
                 OnBoardingScreen(navController)
             }
             composable(Screen.Login.route){
-                LoginScreen(navController)
+                Login(navController)
             }
             composable(Screen.Register.route){
-                RegisterScreen(navController)
+                Register(navController)
             }
             composable(Screen.VerifikasiEmail.route){
                 VerifEmail(navController)
@@ -99,6 +114,7 @@ fun ZerentApp(
             composable(Screen.About.route){
                 ProfileScreen(navController)
             }
+
             composable(Screen.ProfileSetting.route){
                 ProfileSetting(navController)
             }
@@ -107,6 +123,24 @@ fun ZerentApp(
             }
             composable(Screen.Toko.route){
                 TokoScreen(navController)
+
+            composable(Screen.Result.route){
+                ResultScreen(navController)
+            }
+            composable(Screen.Check.route){
+                CheckScreen(navController)
+            }
+            composable(Screen.Done.route){
+                Check(navController)
+            }
+            composable(Screen.Detail.route + "/{detailId}",
+                arguments = listOf(navArgument("detailId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                DetailScreen(
+                    navController = navController,
+                    detailId = navBackStackEntry.arguments?.getInt("detailId")
+                )
+
             }
         }
 

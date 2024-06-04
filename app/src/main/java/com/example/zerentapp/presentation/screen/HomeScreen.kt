@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -93,6 +94,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 SearchBar(
+                    navController = navController,
                     modifier = Modifier
                         .fillMaxWidth(),""
                 )
@@ -260,7 +262,7 @@ fun HomeScreen(
                         items(
                             items = barangs,
                             itemContent = {
-                                ProductCard(dBarang = it)
+                                ProductCard(navController = navController, dBarang = it)
                                 Spacer(modifier = Modifier.width(10.dp))
                             }
                         )
@@ -297,7 +299,7 @@ fun HomeScreen(
                         items(
                             items = barangs,
                             itemContent = {
-                                ProductCard(dBarang = it)
+                                ProductCard(navController = navController, dBarang = it)
                                 Spacer(modifier = Modifier.width(10.dp))
                             }
                         )

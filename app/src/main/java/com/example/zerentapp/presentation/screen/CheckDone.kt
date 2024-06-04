@@ -33,12 +33,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.zerentapp.R
 import com.example.zerentapp.data.Data
 import com.example.zerentapp.model.dCheck
@@ -64,10 +66,16 @@ fun MyButton2(onClick: () -> Unit) {
 }
 
 @Composable
+fun Check(navController: NavController,){
+    val pembayaran = Data.dataPembayaran
+    CheckDone( pembayaran = pembayaran)
+}
+@Composable
 fun CheckDone(
+
     modifier: Modifier = Modifier,
     pembayaran: List<dPembayaran>,
-    checkList: List<dCheck>
+    //checkList: List<dCheck>
 ){
     Box(
         modifier = Modifier
@@ -400,5 +408,5 @@ fun CheckDone(
 @Preview(showBackground = true, device = Devices.PIXEL_6_PRO)
 @Composable
 fun DefaultPreview() {
-    CheckDone(checkList = Data.dataCheck, pembayaran = Data.dataPembayaran)
+    CheckDone( pembayaran = Data.dataPembayaran)
 }

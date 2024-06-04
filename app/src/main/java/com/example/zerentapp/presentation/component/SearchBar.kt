@@ -2,6 +2,7 @@ package com.example.zerentapp.presentation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,10 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(modifier: Modifier = Modifier,  hint :String) {
+
+
+fun SearchBar(modifier: Modifier = Modifier,hint :String, navController: NavController) {
+
     var search by remember { mutableStateOf("") }
 
     Column (
@@ -55,7 +60,7 @@ fun SearchBar(modifier: Modifier = Modifier,  hint :String) {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(24.dp).clickable {navController.navigate("result")}
             )
         },
         colors = TextFieldDefaults.textFieldColors( // Optional: customize colors
@@ -71,8 +76,10 @@ fun SearchBar(modifier: Modifier = Modifier,  hint :String) {
 }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun SearchBarPrev() {
-    SearchBar(modifier = Modifier,"test")
-}
+
+//@Preview(showBackground = true)
+//@Composable
+//private fun SearchBarPrev() {
+//    SearchBar(navController = NavController)
+//}
+
