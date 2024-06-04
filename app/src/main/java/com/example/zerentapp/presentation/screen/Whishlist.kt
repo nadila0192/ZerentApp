@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.zerentapp.data.Data
 import com.example.zerentapp.presentation.component.ProductWhislist
+import com.example.zerentapp.presentation.component.SearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -36,11 +37,12 @@ fun WhishlistScreen(
                         modifier = Modifier.width(360.dp),
                         contentAlignment = Alignment.Center
                     ) {
+                        SearchBar(
                         com.example.zerentapp.presentation.component.SearchBar(
                             navController = navController,
                             modifier = Modifier.padding(
                                 16.dp
-                            )
+                            ),""
                         )
                     }
                 },

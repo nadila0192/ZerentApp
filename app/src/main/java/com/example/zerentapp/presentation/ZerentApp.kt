@@ -30,17 +30,28 @@ import androidx.navigation.navArgument
 import com.example.zerentapp.R
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
+
+import com.example.zerentapp.presentation.screen.BantuanScreen
+
 import com.example.zerentapp.presentation.screen.Check
 import com.example.zerentapp.presentation.screen.CheckDone
 import com.example.zerentapp.presentation.screen.CheckScreen
 import com.example.zerentapp.presentation.screen.DetailScreen
+
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.Login.Login
 import com.example.zerentapp.presentation.screen.Login.Register
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
+
+import com.example.zerentapp.presentation.screen.ProfileSetting
+import com.example.zerentapp.presentation.screen.RegisterScreen
+import com.example.zerentapp.presentation.screen.RequestScreen
+import com.example.zerentapp.presentation.screen.TokoScreen
+
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.ResultScreen
+
 import com.example.zerentapp.presentation.screen.VerifEmail
 import com.example.zerentapp.presentation.screen.WhishlistScreen
 import com.example.zerentapp.utils.shouldShowBottomBar
@@ -103,6 +114,16 @@ fun ZerentApp(
             composable(Screen.About.route){
                 ProfileScreen(navController)
             }
+
+            composable(Screen.ProfileSetting.route){
+                ProfileSetting(navController)
+            }
+            composable(Screen.Bantuan.route){
+                BantuanScreen(navController)
+            }
+            composable(Screen.Toko.route){
+                TokoScreen(navController)
+
             composable(Screen.Result.route){
                 ResultScreen(navController)
             }
@@ -119,6 +140,7 @@ fun ZerentApp(
                     navController = navController,
                     detailId = navBackStackEntry.arguments?.getInt("detailId")
                 )
+
             }
         }
 

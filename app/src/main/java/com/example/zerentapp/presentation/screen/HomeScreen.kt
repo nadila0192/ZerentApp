@@ -96,7 +96,7 @@ fun HomeScreen(
                 SearchBar(
                     navController = navController,
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth(),""
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))

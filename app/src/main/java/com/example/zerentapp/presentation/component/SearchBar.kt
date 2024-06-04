@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -31,7 +32,10 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(modifier: Modifier = Modifier, navController: NavController) {
+
+
+fun SearchBar(modifier: Modifier = Modifier,hint :String, navController: NavController) {
+
     var search by remember { mutableStateOf("") }
 
     Column (
@@ -63,13 +67,19 @@ fun SearchBar(modifier: Modifier = Modifier, navController: NavController) {
             containerColor = Color.Transparent, // Make background transparent
             focusedIndicatorColor = Color.Transparent, // Remove selection highlight
             unfocusedIndicatorColor = Color.Transparent // Remove unfocused indicator
-        )
+        ),
+        
+       label = {
+           Text(text = hint)
+       }
     )
 }
 }
+
 
 //@Preview(showBackground = true)
 //@Composable
 //private fun SearchBarPrev() {
 //    SearchBar(navController = NavController)
 //}
+
