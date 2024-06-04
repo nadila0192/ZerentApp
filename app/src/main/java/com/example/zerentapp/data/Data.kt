@@ -31,13 +31,22 @@ object Data {
             foto = R.drawable.nora
         ),
         dBarang(
-            id = 3,
-            nama = "Fighting Nora Costume",
+            id = 4,
+            nama = "Rental Mobil",
+            category = "Kendaraan",
+            harga = "300.000",
+            detail = "Menyewakan kamera Canon untuk kebutuhan tugas, hunting foto serta keperluan lainnya.",
+            lokasi = "Batam",
+            foto = R.drawable.productmobil
+        ),
+        dBarang(
+            id = 5,
+            nama = "Rental Sepeda MTB",
             category = "Hobi",
             harga = "100.000",
             detail = "Rental cosplay costume mu dengan mudah dan cepat disini.",
             lokasi = "Batam",
-            foto = R.drawable.canon3000d
+            foto = R.drawable.productsepeda
         ),
     )
 

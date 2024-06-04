@@ -46,14 +46,17 @@ import com.example.zerentapp.presentation.component.UlasanScreen
 import com.example.zerentapp.data.Data
 import com.example.zerentapp.model.dBarang
 import com.example.zerentapp.model.dUlasan
+import com.example.zerentapp.navigation.Screen
 
 @Composable
 fun DetailScreen(
-    modifier: Modifier,
     navController: NavController,
     detailId: Int?
 ){
-
+    val detailList: List<dBarang> = Data.dataBarang.filter { id ->
+        id.id == detailId
+    }
+    DetailCard(detailList = detailList)
 }
 
 //@Composable
@@ -127,7 +130,7 @@ fun RatingBar(
 
 
 @Composable
-private fun DetailCard(
+ fun DetailCard(
     detailList: List<dBarang>,
     modifier: Modifier = Modifier,
     ulasann: List<dUlasan> = Data.dataUlasan,
