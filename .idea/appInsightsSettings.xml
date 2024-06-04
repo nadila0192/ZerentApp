@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.zerentapp" />
+                  <option name="mobileSdkAppId" value="1:730363290241:android:914f0eab414344cd74e380" />
+                  <option name="projectId" value="zerentapp" />
+                  <option name="projectNumber" value="730363290241" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

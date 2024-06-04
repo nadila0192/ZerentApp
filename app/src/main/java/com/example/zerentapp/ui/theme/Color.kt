@@ -13,6 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 val color1 = Color(0xFF043C5B)
 val color2 = Color(0xFFF3F4F6)
 val colorBintang = Color(0xFFF3C31A)
+val color3 = Color(0xFFE9F5FE)
 
 
 val cardFill1 = Color(0xFFE2F4FF)
