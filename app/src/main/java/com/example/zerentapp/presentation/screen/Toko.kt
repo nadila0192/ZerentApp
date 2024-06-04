@@ -77,10 +77,10 @@ fun TokoScreen(navController: NavController,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(80.dp)
+                        .size(60.dp)
                         .clip(CircleShape)
                 )
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(15.dp))
                 Column {
                     Text(
                         text = "Mj",
@@ -110,7 +110,7 @@ fun TokoScreen(navController: NavController,
                     }
                 }
 
-                Spacer(modifier = Modifier.width(80.dp))
+                Spacer(modifier = Modifier.width(138.dp))
                 Image(painter = painterResource(id = R.drawable.ic_notification),
                     contentDescription = null,
                     modifier = Modifier.size(30.dp))
@@ -127,10 +127,10 @@ fun TokoScreen(navController: NavController,
                     color = Color.White,
                     fontSize = 12.sp)
                 Spacer(modifier = Modifier.width(15.dp))
-                Text(text = "Mengikuti : 2002",
+                Text(text = "Mengikuti : 198",
                     color = Color.White,
                     fontSize = 12.sp)
-                Spacer(modifier = Modifier.width(25.dp))
+                Spacer(modifier = Modifier.width(75.dp))
                 Text(text = "Rating toko 5",
                     color = Color.White,
                     fontSize = 12.sp)
@@ -145,7 +145,7 @@ fun TokoScreen(navController: NavController,
 
             Row (
                 modifier
-                    .height(130.dp)
+                    .height(110.dp)
                     .fillMaxWidth()
                     .background(Color(0xFFF0F0F0))
                     .padding(start = 25.dp, end = 25.dp)){
@@ -155,9 +155,11 @@ fun TokoScreen(navController: NavController,
 
                     Text(text = "Tentang Toko",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp)
+                        fontSize = 16.sp)
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(text = "Menyediakan berbagai keperluan, mulai dari barang Hobi hingga costume anime cosplay. Memberikan pelayanan yang cepat, mudah dan praktis. ",
-                        maxLines = 3)
+                        maxLines = 3,
+                        fontSize = 11.sp)
                 }
             }
 
@@ -166,13 +168,15 @@ fun TokoScreen(navController: NavController,
                 modifier = Modifier.fillMaxWidth()){
 
                 Button(onClick = { /*TODO*/ },
-                    modifier = Modifier.width(300.dp),
+                    modifier = Modifier.width(350.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF043C5B)
                     ) ,
                     shape = RoundedCornerShape(10.dp)
                 ) {
-                    Text(text = "Update Barang")
+                    Text(text = "Update Barang",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp)
                 }
             }
 
