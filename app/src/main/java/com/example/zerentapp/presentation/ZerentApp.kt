@@ -6,19 +6,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BrowseGallery
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Movie
-import androidx.compose.material.icons.filled.Topic
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -38,14 +30,15 @@ import androidx.navigation.navArgument
 import com.example.zerentapp.R
 import com.example.zerentapp.navigation.NavigationItem
 import com.example.zerentapp.navigation.Screen
-import com.example.zerentapp.presentation.screen.DetailCard
+import com.example.zerentapp.presentation.screen.Check
+import com.example.zerentapp.presentation.screen.CheckDone
+import com.example.zerentapp.presentation.screen.CheckScreen
 import com.example.zerentapp.presentation.screen.DetailScreen
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.Login.Login
 import com.example.zerentapp.presentation.screen.Login.Register
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
-import com.example.zerentapp.presentation.screen.Login.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.ResultScreen
 import com.example.zerentapp.presentation.screen.VerifEmail
@@ -112,6 +105,12 @@ fun ZerentApp(
             }
             composable(Screen.Result.route){
                 ResultScreen(navController)
+            }
+            composable(Screen.Check.route){
+                CheckScreen(navController)
+            }
+            composable(Screen.Done.route){
+                Check(navController)
             }
             composable(Screen.Detail.route + "/{detailId}",
                 arguments = listOf(navArgument("detailId") { type = NavType.IntType })

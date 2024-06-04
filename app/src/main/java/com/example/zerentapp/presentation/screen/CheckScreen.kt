@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.zerentapp.R
@@ -47,10 +49,19 @@ import com.example.zerentapp.ui.theme.cardStroke2
 import com.example.zerentapp.ui.theme.mainn
 
 @Composable
-fun CheckScreen(
-//    modifier: Modifier,
-){
-
+fun CheckScreen(navController: NavHostController) {
+    val checkList = Data.dataCheck
+    val pembayaran = Data.dataPembayaran
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        item {
+            Spacer(modifier = Modifier.height(8.dp)) // Add a spacer as a header
+        }
+        item {
+            CheckCard(navController = navController, checkList = checkList, pembayaran = pembayaran)
+        }
+    }
 }
 
 @Composable
@@ -70,6 +81,7 @@ fun MyButton(onClick: () -> Unit) {
 
 @Composable
 private fun CheckCard(
+    navController: NavHostController,
     checkList: List<dCheck>,
     pembayaran: List<dPembayaran>,
     modifier: Modifier = Modifier,
@@ -115,8 +127,7 @@ private fun CheckCard(
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Column(
-                        modifier = Modifier
-                            .verticalScroll(rememberScrollState()),
+                        modifier = Modifier,
                         verticalArrangement = Arrangement.Center
 
                     ) {
@@ -406,7 +417,7 @@ private fun CheckCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MyButton(onClick = { /* Lakukan sesuatu saat tombol diklik */ })
+            MyButton(onClick = { navController.navigate("done") })
         }
 
     }
@@ -415,5 +426,5 @@ private fun CheckCard(
 @Preview(showBackground = true)
 @Composable
 private fun CheckScreenPreview() {
-    CheckCard(checkList = Data.dataCheck, pembayaran = Data.dataPembayaran)
+    CheckCard(navController = NavHostController(LocalContext.current), checkList = Data.dataCheck, pembayaran = Data.dataPembayaran)
 }
