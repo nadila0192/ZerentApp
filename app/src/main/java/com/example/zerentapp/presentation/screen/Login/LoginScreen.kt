@@ -61,6 +61,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.utils.Constant.CLIENT
@@ -283,7 +284,7 @@ fun LoginScreen(
                             label = {Text(text = "Password")},
                             leadingIcon = {Icon(imageVector = Icons.Default.Lock , contentDescription = null)},
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                            visualTransformation = VisualTransformation.None,
+                            visualTransformation = PasswordVisualTransformation(),
                             shape = RoundedCornerShape(10.dp)
                         )
                         Spacer(modifier = Modifier.height(18.dp))

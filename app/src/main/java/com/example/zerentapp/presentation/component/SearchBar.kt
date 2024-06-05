@@ -34,7 +34,9 @@ import androidx.navigation.NavController
 @Composable
 
 
-fun SearchBar(modifier: Modifier = Modifier,hint :String, navController: NavController) {
+fun SearchBar(modifier: Modifier = Modifier,
+//              hint :String,
+              navController: NavController) {
 
     var search by remember { mutableStateOf("") }
 
@@ -69,9 +71,9 @@ fun SearchBar(modifier: Modifier = Modifier,hint :String, navController: NavCont
             unfocusedIndicatorColor = Color.Transparent // Remove unfocused indicator
         ),
         
-       label = {
-           Text(text = hint)
-       }
+//       label = {
+//           Text(text = hint)
+//       }
     )
 }
 }

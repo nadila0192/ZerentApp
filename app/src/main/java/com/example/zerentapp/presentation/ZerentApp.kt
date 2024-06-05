@@ -37,6 +37,7 @@ import com.example.zerentapp.presentation.screen.Check
 import com.example.zerentapp.presentation.screen.CheckDone
 import com.example.zerentapp.presentation.screen.CheckScreen
 import com.example.zerentapp.presentation.screen.DetailScreen
+import com.example.zerentapp.presentation.screen.FiturResult
 
 import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.Login.Login
@@ -45,7 +46,6 @@ import com.example.zerentapp.presentation.screen.OnBoardingScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
 
 import com.example.zerentapp.presentation.screen.ProfileSetting
-import com.example.zerentapp.presentation.screen.RegisterScreen
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.TokoScreen
 
@@ -62,9 +62,6 @@ fun ZerentApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
-
-
-
     val navBackStack by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStack?.destination?.route
     val context = LocalContext.current
@@ -121,11 +118,14 @@ fun ZerentApp(
             composable(Screen.Bantuan.route){
                 BantuanScreen(navController)
             }
-            composable(Screen.Toko.route){
+            composable(Screen.Toko.route) {
                 TokoScreen(navController)
-
+            }
             composable(Screen.Result.route){
                 ResultScreen(navController)
+            }
+            composable(Screen.ResultFailed.route){
+                FiturResult(navController)
             }
             composable(Screen.Check.route){
                 CheckScreen(navController)

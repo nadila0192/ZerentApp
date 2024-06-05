@@ -37,12 +37,11 @@ fun WhishlistScreen(
                         modifier = Modifier.width(360.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        SearchBar(
                         com.example.zerentapp.presentation.component.SearchBar(
                             navController = navController,
                             modifier = Modifier.padding(
                                 16.dp
-                            ),""
+                            )
                         )
                     }
                 },
