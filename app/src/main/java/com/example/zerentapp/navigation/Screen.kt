@@ -19,5 +19,7 @@ sealed class Screen (val route : String) {
     data object Result : Screen("result")
     data object Check : Screen("check")
     data object Done : Screen("done")
+    data object ResultFailed : Screen("fail")
+
 
 }

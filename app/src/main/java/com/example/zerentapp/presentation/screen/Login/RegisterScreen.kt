@@ -46,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -79,6 +80,8 @@ fun Register(
     val state = viewModel.state.collectAsState(initial = null)
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var dummy by remember { mutableStateOf("") }
+    var dummy2 by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
     var isRegistering by remember { mutableStateOf(false) }
     val googleLoginState = viewModel.stateGoogle.value
@@ -106,8 +109,12 @@ fun Register(
         RegisterScreen(
             email = email,
             password = password,
+            dummy = dummy,
+            dummy2 = dummy2,
             passwordConfirm = passwordConfirm,
             onEmailChange = { email = it },
+            onchange1 = { dummy = it },
+            onchange2 = {dummy2 = it},
             onPasswordChange = { password = it },
             onPasswordConfirmChange = { passwordConfirm = it },
             onRegisterClick = {
@@ -170,11 +177,15 @@ fun Register(
 fun RegisterScreen(
     email: String,
     password: String,
+    dummy: String,
+    dummy2: String,
     passwordConfirm: String,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordConfirmChange: (String) -> Unit,
     onRegisterClick: () -> Unit,
+    onchange1: (String) -> Unit,
+    onchange2: (String) -> Unit,
     modifier: Modifier = Modifier,
     navController: NavController
 ){
@@ -221,8 +232,8 @@ fun RegisterScreen(
                 ) {
                     Spacer(modifier = Modifier.height(10.dp))
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = dummy,
+                        onValueChange = onchange1,
                         label = { Text(text = "Masukkan Username") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Person , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -248,7 +259,7 @@ fun RegisterScreen(
                         label = { Text(text = "Password") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Lock , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        visualTransformation = VisualTransformation.None,
+                        visualTransformation = PasswordVisualTransformation(),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier
                             .size(width = 310.dp, height = 65.dp)
@@ -259,14 +270,14 @@ fun RegisterScreen(
                         label = { Text(text = "Masukkan Ulang Password") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Lock , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                        visualTransformation = VisualTransformation.None,
+                        visualTransformation = PasswordVisualTransformation(),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier
                             .size(width = 310.dp, height = 65.dp)
                     )
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = dummy2,
+                        onValueChange = onchange2,
                         label = { Text(text = "Masukkan Nomor Telephone") },
                         leadingIcon = { Icon(imageVector = Icons.Default.Phone , contentDescription = null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),

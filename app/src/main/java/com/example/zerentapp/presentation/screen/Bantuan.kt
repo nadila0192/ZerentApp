@@ -62,9 +62,12 @@ fun BantuanScreen(navController: NavController,
                 Spacer(modifier = Modifier.height(20.dp))
 
                     SearchBar(
+                        //navController = navController,
                         modifier
                             .height(40.dp)
-                            .width(400.dp),"Cari topik apa")
+                            .width(400.dp),
+                        navController = rememberNavController()
+                    )
 
 
                 Spacer(modifier = Modifier.height(40.dp))

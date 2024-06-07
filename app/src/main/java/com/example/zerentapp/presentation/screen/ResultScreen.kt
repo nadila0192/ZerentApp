@@ -1,6 +1,7 @@
 package com.example.zerentapp.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -46,7 +47,7 @@ fun ResultScreen(
             TopAppBar(
                 title = {
                     Box(
-                        modifier = Modifier.width(360.dp),
+                        modifier = Modifier.width(360.dp).clickable {navController.navigate("fail")},
                         contentAlignment = Alignment.Center
                     ) {
                         SearchBar(
