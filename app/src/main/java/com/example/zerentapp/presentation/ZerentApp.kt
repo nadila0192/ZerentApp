@@ -34,7 +34,6 @@ import com.example.zerentapp.navigation.Screen
 import com.example.zerentapp.presentation.screen.BantuanScreen
 
 import com.example.zerentapp.presentation.screen.Check
-import com.example.zerentapp.presentation.screen.CheckDone
 import com.example.zerentapp.presentation.screen.CheckScreen
 import com.example.zerentapp.presentation.screen.DetailScreen
 import com.example.zerentapp.presentation.screen.FiturResult
@@ -43,13 +42,13 @@ import com.example.zerentapp.presentation.screen.HomeScreen
 import com.example.zerentapp.presentation.screen.Login.Login
 import com.example.zerentapp.presentation.screen.Login.Register
 import com.example.zerentapp.presentation.screen.OnBoardingScreen
+import com.example.zerentapp.presentation.screen.PostingProductScreen
 import com.example.zerentapp.presentation.screen.ProfileScreen
 
 import com.example.zerentapp.presentation.screen.ProfileSetting
 import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.TokoScreen
 
-import com.example.zerentapp.presentation.screen.RequestScreen
 import com.example.zerentapp.presentation.screen.ResultScreen
 
 import com.example.zerentapp.presentation.screen.VerifEmail
@@ -120,6 +119,9 @@ fun ZerentApp(
             }
             composable(Screen.Toko.route) {
                 TokoScreen(navController)
+            }
+            composable(Screen.PostingBarang.route) {
+                PostingProductScreen(navController)
             }
             composable(Screen.Result.route){
                 ResultScreen(navController)
