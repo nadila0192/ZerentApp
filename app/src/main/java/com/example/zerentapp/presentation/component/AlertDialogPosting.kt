@@ -1,6 +1,7 @@
 package com.example.zerentapp.presentation.component
 
 import android.app.AlertDialog
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,7 +22,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AlertDialogPosting(onDismiss: () -> Unit, modifier: Modifier = Modifier) {
+fun AlertDialogPosting(onDismiss: () -> Unit, modifier: Modifier = Modifier ) {
     var selectedCity by remember { mutableStateOf("") }
     var selectedDistrict by remember { mutableStateOf("") }
     var no by remember { mutableStateOf("") }
@@ -52,96 +54,14 @@ fun AlertDialogPosting(onDismiss: () -> Unit, modifier: Modifier = Modifier) {
                     Text(text = "Kota", fontSize = 14.sp)
                     Spacer(modifier = Modifier.height(5.dp))
 
-                    var cityExpanded by remember { mutableStateOf(false) }
-                    ExposedDropdownMenuBox(
-                        expanded = cityExpanded,
-                        onExpandedChange = { cityExpanded = !cityExpanded }
-                    ) {
-                        TextField(
-                            value = selectedCity,
-                            onValueChange = { },
-                            readOnly = true,
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = cityExpanded)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .border(1.dp, Color.Black, RoundedCornerShape(4.dp)),
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color.White,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent
-                            ),
-                            placeholder = { Text(text = "Pilih Kota") }
-                        )
-                        ExposedDropdownMenu(
-                            expanded = cityExpanded,
-                            onDismissRequest = { cityExpanded = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("Bandung") },
-                                onClick = {
-                                    selectedCity = "Bandung"
-                                    cityExpanded = false
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Semarang") },
-                                onClick = {
-                                    selectedCity = "Semarang"
-                                    cityExpanded = false
-                                }
-                            )
-                        }
-                    }
+                    ExposedDropdownitem(items = arrayOf("bandung","semarang","jakarta") )
 
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Text(text = "Kecamatan", fontSize = 14.sp)
                     Spacer(modifier = Modifier.height(5.dp))
 
-                    var districtExpanded by remember { mutableStateOf(false) }
-                    ExposedDropdownMenuBox(
-                        expanded = districtExpanded,
-                        onExpandedChange = { districtExpanded = !districtExpanded }
-                    ) {
-                        TextField(
-                            value = selectedDistrict,
-                            onValueChange = { },
-                            readOnly = true,
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = districtExpanded)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .border(1.dp, Color.Black, RoundedCornerShape(4.dp)),
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color.White,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent
-                            ),
-                            placeholder = { Text(text = "Pilih Kecamatan") }
-                        )
-                        ExposedDropdownMenu(
-                            expanded = districtExpanded,
-                            onDismissRequest = { districtExpanded = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("Cibaduyut") },
-                                onClick = {
-                                    selectedDistrict = "Cibaduyut"
-                                    districtExpanded = false
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Cibadut") },
-                                onClick = {
-                                    selectedDistrict = "Cibadut"
-                                    districtExpanded = false
-                                }
-                            )
-                        }
-                    }
+                    ExposedDropdownitem(items = arrayOf("cibaduyut","ciasem","cimanis"))
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -188,7 +108,18 @@ fun AlertDialogPosting(onDismiss: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 @Preview(showBackground = true)
 @Composable
 private fun AlertDialogPrev() {
-    AlertDialogPosting(onDismiss = { /*TODO*/ })}
+    AlertDialogPosting(onDismiss = { /*TODO*/ }, modifier = Modifier)}
