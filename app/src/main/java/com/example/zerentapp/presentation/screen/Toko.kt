@@ -54,7 +54,7 @@ fun TokoScreen(navController: NavController,
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* TODO: Add action */ },
+                onClick = {  navController.navigate("postingbarang") },
                 containerColor = Color(0xFFFEBD16)
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Item")

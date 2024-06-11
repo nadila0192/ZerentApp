@@ -231,24 +231,8 @@ fun ProfileScreen(
                     
                 }
 
-                //box tambahan
-//                Box( modifier = Modifier
-//                    .fillMaxSize()
-//                    .offset(y = (600).dp)){
-//
-//                    Card (modifier = Modifier
-//                        .padding(top = 0.dp, start = 20.dp, end = 20.dp, bottom = 20.dp)
-//                        .clip(shape = RoundedCornerShape(18.dp))  // Clip to the same shape as the border
-//                        .border(width = 2.dp, color = Color(0xFFDBE5EB), shape = RoundedCornerShape(18.dp))
-//                        .fillMaxWidth()
-//                        .height(200.dp),
-//                        elevation = CardDefaults.cardElevation(10.dp),
-//                        colors = CardDefaults.cardColors(containerColor = Color.White) // Change the color as needed
-//
-//                    ){
-//
-//                    }
-//                }
+
+
             }
 
 

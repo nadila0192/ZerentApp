@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,9 +80,9 @@ fun SearchBar(modifier: Modifier = Modifier,
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//private fun SearchBarPrev() {
-//    SearchBar(navController = NavController)
-//}
+@Preview(showBackground = true)
+@Composable
+private fun SearchBarPrev() {
+    SearchBar(navController = rememberNavController())
+}
 
