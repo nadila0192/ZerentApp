@@ -104,7 +104,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.2.0")
 
     //firestore
-//    implementation ("com.google.firebase:firebase-bom:31.1.1")
-//    implementation ("com.google.firebase:firebase-firestore-ktx")
-//    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }

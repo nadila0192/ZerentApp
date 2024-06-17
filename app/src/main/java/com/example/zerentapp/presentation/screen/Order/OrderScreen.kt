@@ -42,11 +42,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberImagePainter
 import com.example.zerentapp.data.Data.sampleStatus
 import com.example.zerentapp.model.Barang
 import com.example.zerentapp.model.Status
+import com.example.zerentapp.presentation.screen.Order.Order
+import com.example.zerentapp.presentation.screen.Order.OrderViewModel
 import com.example.zerentapp.ui.theme.color1
 
 val garis = Color(android.graphics.Color.parseColor("#33373737"))
@@ -220,7 +224,11 @@ fun StatusSelection(statusList: List<Status>, currentStatus: MutableState<Status
 
 }
 @Composable
-fun StatusSection(status: Status) {
+fun StatusSection(
+    status: Status,
+    viewModel: OrderViewModel = hiltViewModel()
+) {
+    val rentals by viewModel.products.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -228,16 +236,10 @@ fun StatusSection(status: Status) {
             .padding(vertical = 8.dp)
 
     ) {
-//        Text(
-//            modifier = Modifier
-//                .padding(bottom = 17.dp)
-//            ,
-//            text = status.name,
-//            style = MaterialTheme.typography.headlineSmall
-//        )
+
         LazyColumn {
-            items(status.items  ) { barang ->
-                BarangCard(barang = barang)
+            items(rentals) { product ->
+                BarangCard(product)
 
             }
 
@@ -246,10 +248,8 @@ fun StatusSection(status: Status) {
 }
 
 @Composable
-fun BarangCard(barang: Barang,
-
+fun BarangCard(product: Order,
                ) {
-
     val isSelected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
@@ -262,18 +262,11 @@ fun BarangCard(barang: Barang,
                 spotColor = Color.Black,
                 ambientColor = Color.Black
             )
-            .clip(RoundedCornerShape(10.dp))
-        ,
+            .clip(RoundedCornerShape(10.dp)),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFEBEBEB),
-
             )
-
-
     ) {
-
-
-
         Column(
             modifier = Modifier
                 .padding(10.dp)
@@ -302,7 +295,7 @@ fun BarangCard(barang: Barang,
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Image(
-                    painter = painterResource(id = barang.image),
+                    painter = rememberImagePainter(data = product.productImage),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -314,13 +307,14 @@ fun BarangCard(barang: Barang,
                     modifier = Modifier
                 ) {
                     Text(
-                        text = barang.name,
+                        text = product.productName,
                         style = MaterialTheme.typography.titleSmall,
 
                         )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Durasi : ${barang.waktu} Hari",
+                        //text = "Durasi : ${barang.waktu} Hari",
+                        text = "Durasi : 2 Hari",
                         style = MaterialTheme.typography.bodySmall,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
@@ -334,7 +328,7 @@ fun BarangCard(barang: Barang,
                     modifier = Modifier
                         .padding(start = 15.dp)
                     ,
-                    text = "Rp${barang.harga}/hari",)
+                    text = "Rp${product.productHarga}/hari",)
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     modifier = Modifier
@@ -360,7 +354,7 @@ fun BarangCard(barang: Barang,
                     .padding(start = 5.dp)
             ){
                 Image(
-                    painter = painterResource(id = barang.imaget),
+                    painter = rememberImagePainter(data = product.productImage),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -370,7 +364,7 @@ fun BarangCard(barang: Barang,
                 Text(modifier = Modifier
                     .padding(start = 10.dp, top = 7.dp)
                     ,
-                    text = barang.title_toko,)
+                    text = product.productStatus,)
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
 
@@ -382,7 +376,8 @@ fun BarangCard(barang: Barang,
                 ) {
                     Row {
                         Text(
-                            text = "${barang.button_action}",
+//                            text = "${barang.button_action}",
+                            text = "konfirmasi",
                             modifier = Modifier
 
                                 .padding(horizontal = 10.dp,)
