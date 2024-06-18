@@ -13,7 +13,9 @@ data class Order(
     val productName: String = "",
     val productHarga: String = "",
     val productImage: String = "",
-    val productStatus: String = ""
+    val productStatus: String = "",
+    val rentalEndDate: String = "",
+    val rentalStartDate: String = "",
 )
 
 
