@@ -140,7 +140,7 @@ fun ZerentApp(
             ) { navBackStackEntry ->
                 DetailScreen(
                     navController = navController,
-                    detailId = navBackStackEntry.arguments?.getInt("detailId")
+                    detailId = navBackStackEntry.arguments?.getInt("detailId"),
                 )
 
             }
