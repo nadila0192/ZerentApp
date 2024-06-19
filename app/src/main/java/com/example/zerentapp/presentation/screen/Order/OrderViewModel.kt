@@ -18,6 +18,7 @@ data class Order(
     val rentalStatus: String = "",
     val rentalEndDate: String = "",
     val rentalStartDate: String = "",
+    val rentalDuration: String = "",
 )
 
 

@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,15 +32,30 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
 import com.example.zerentapp.data.Data.sampleStatus
 import com.example.zerentapp.model.Status
 import com.example.zerentapp.presentation.screen.Order.Order
 import com.example.zerentapp.presentation.screen.Order.ToolKit.OrderSearch
 import com.example.zerentapp.presentation.screen.Order.OrderViewModel
+import android.content.Context
+import coil.ImageLoader
+import coil.decode.SvgDecoder
 
 val garis = Color(android.graphics.Color.parseColor("#323232"))
 val biggaris = Color(android.graphics.Color.parseColor("#E9F5FE"))
+
+fun createImageLoader(context: Context): ImageLoader {
+    return ImageLoader.Builder(context)
+        .components {
+            add(SvgDecoder.Factory())
+        }
+        .build()
+}
 
 @Composable
 fun StatusScreen(status: MutableState<Status>) {
@@ -58,7 +74,7 @@ fun StatusScreen(status: MutableState<Status>) {
     )
     Column(modifier = Modifier
 
-        .padding(start = 10.dp, end = 10.dp,top = 15.dp)
+        .padding(start = 10.dp, end = 10.dp, top = 15.dp)
         .width(800.dp)
         .offset(y = 50.dp,)
         .height(60.dp)
@@ -113,7 +129,8 @@ fun StatusSelection(
                                     .clip(RoundedCornerShape(10.dp))
                                     .clickable {
                                         currentStatus.value = status
-                                        viewModel.fetchProductsByStatus(status.name)}
+                                        viewModel.fetchProductsByStatus(status.name)
+                                    }
                                     .background(
                                         if (currentStatus.value == status) {
                                             Color(0xFF043C5B)
@@ -165,6 +182,8 @@ fun BarangCard(
     viewModel: OrderViewModel = hiltViewModel(),
     ) {
     val isSelected = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val imageLoader = createImageLoader(context)
     Card(
         modifier = Modifier
 
@@ -177,7 +196,8 @@ fun BarangCard(
                     topEnd = 10.dp,
                     topStart = 10.dp,
                     bottomEnd = 25.dp,
-                    bottomStart = 25.dp, ),
+                    bottomStart = 25.dp,
+                ),
                 spotColor = Color.Black,
                 ambientColor = Color.Black
             ),
@@ -215,7 +235,12 @@ fun BarangCard(
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Image(
-                    painter = rememberImagePainter(data = product.productImage),
+                    painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(context)
+                            .data(product.productImage)
+                            .size(Size.ORIGINAL)
+                            .build(),
+                        imageLoader = imageLoader),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -234,7 +259,7 @@ fun BarangCard(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         //text = "Durasi : ${barang.waktu} Hari",
-                        text = "Durasi : 2 Hari",
+                        text = "Durasi : ${product.rentalDuration} Hari",
                         style = MaterialTheme.typography.bodySmall,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
@@ -281,8 +306,8 @@ fun BarangCard(
                     .padding(top = 15.dp)
                     .padding(start = 5.dp)
             ){
-                Image(
-                    painter = rememberImagePainter(data = product.productImage),
+                AsyncImage(
+                    model = "https://example.com/test-image.jpg", // Use a simple test image URL
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -292,7 +317,7 @@ fun BarangCard(
                 Text(modifier = Modifier
                     .padding(start = 10.dp, top = 7.dp)
                     ,
-                    text = product.rentalStatus,)
+                    text = "Toko Serba Ada",)
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
 
@@ -320,7 +345,7 @@ fun BarangCard(
                                     if (isSelected.value) {
                                         Color(0xFFFFFFFF)
                                     } else {
-                                        Color(0xFF043C5B )
+                                        Color(0xFF043C5B)
                                     }
                                 )
                                 .border(
