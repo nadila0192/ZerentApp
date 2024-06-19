@@ -43,7 +43,6 @@ val biggaris = Color(android.graphics.Color.parseColor("#E9F5FE"))
 
 @Composable
 fun StatusScreen(status: MutableState<Status>) {
-
     Text(
         fontSize = 25.sp,
         fontWeight = FontWeight.Bold,
@@ -87,10 +86,10 @@ fun StatusScreen(status: MutableState<Status>) {
 
 
 @Composable
-fun StatusSelection(statusList: List<Status>, currentStatus: MutableState<Status>) {
-
-
-
+fun StatusSelection(
+    statusList: List<Status>,
+    currentStatus: MutableState<Status>,
+    viewModel: OrderViewModel = hiltViewModel()) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
@@ -104,18 +103,17 @@ fun StatusSelection(statusList: List<Status>, currentStatus: MutableState<Status
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
                         .padding(top = 45.dp, )
-
                 ) {
-
                     items(statusList) { status ->
-
                         Row {
                             Text(
                                 text = "${status.name}",
                                 modifier = Modifier
                                     .padding(horizontal = 10.dp,)
                                     .clip(RoundedCornerShape(10.dp))
-                                    .clickable { currentStatus.value = status }
+                                    .clickable {
+                                        currentStatus.value = status
+                                        viewModel.fetchProductsByStatus(status.name)}
                                     .background(
                                         if (currentStatus.value == status) {
                                             Color(0xFF043C5B)
@@ -123,23 +121,10 @@ fun StatusSelection(statusList: List<Status>, currentStatus: MutableState<Status
                                             Color(0xFFE9F5FE)
                                         }
                                     )
-//                                             .border(
-//                                                 width = 1.5.dp,
-//                                                 shape = RoundedCornerShape(10.dp),
-//                                                 color = if (currentStatus.value == status) Color(
-//                                                     0xFF043C5B
-//                                                 ) else Color(
-//                                                     0xFFE9F5FE
-//                                                 )
-//                                             )
-
-                                    .padding(10.dp)
-
-                                ,
+                                    .padding(10.dp),
                                 fontSize = 14.sp,
                                 color = if (currentStatus.value == status) Color.White else Color.Black,
                                 fontWeight = if (currentStatus.value == status) FontWeight.Bold else FontWeight.Medium ,
-
                                 )
                         }
                     }
@@ -175,8 +160,10 @@ fun StatusSection(
 }
 
 @Composable
-fun BarangCard(product: Order,
-               ) {
+fun BarangCard(
+    product: Order,
+    viewModel: OrderViewModel = hiltViewModel(),
+    ) {
     val isSelected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
@@ -305,7 +292,7 @@ fun BarangCard(product: Order,
                 Text(modifier = Modifier
                     .padding(start = 10.dp, top = 7.dp)
                     ,
-                    text = product.productStatus,)
+                    text = product.rentalStatus,)
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
 
@@ -323,7 +310,12 @@ fun BarangCard(product: Order,
 
                                 .padding(horizontal = 10.dp,)
                                 .clip(RoundedCornerShape(10.dp))
-                                .clickable { isSelected.value = !isSelected.value }
+                                .clickable {
+                                    isSelected.value = !isSelected.value
+                                    if (isSelected.value) {
+                                        viewModel.updateProductStatus(product.id, "selesai")
+                                    }
+                                }
                                 .background(
                                     if (isSelected.value) {
                                         Color(0xFFFFFFFF)
