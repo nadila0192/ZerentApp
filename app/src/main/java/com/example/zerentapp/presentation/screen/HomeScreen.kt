@@ -1,6 +1,8 @@
 package com.example.zerentapp.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -48,9 +50,12 @@ import com.example.zerentapp.R
 import com.example.zerentapp.presentation.component.SearchBar
 import com.example.zerentapp.ui.theme.color1
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.LaunchedEffect
 import com.example.zerentapp.data.Data
 import com.example.zerentapp.presentation.component.ProductCard
 import com.example.zerentapp.ui.theme.poppinsFontFamily
+import kotlinx.coroutines.delay
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,26 +106,28 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                bannerSliding()
+
                 // Banner promo
-                LazyRow(modifier = Modifier.fillMaxWidth()) {
-                    items(3) {
-                        Card(
-                            modifier
-                                .height(120.dp)
-                                .width(353.dp)
-                                .fillMaxWidth()
-                                .padding(end = 5.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.bannerpromohome),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(1f),
-                                contentScale = ContentScale.FillWidth
-                            )
-                        }
-                    }
-                }
+//                LazyRow(modifier = Modifier.fillMaxWidth()) {
+//                    items(3) {
+//                        Card(
+//                            modifier
+//                                .height(120.dp)
+//                                .width(353.dp)
+//                                .fillMaxWidth()
+//                                .padding(end = 5.dp)
+//                        ) {
+//                            Image(
+//                                painter = painterResource(id = R.drawable.bannerpromohome),
+//                                contentDescription = null,
+//                                modifier = Modifier
+//                                    .fillMaxSize(1f),
+//                                contentScale = ContentScale.FillWidth
+//                            )
+//                        }
+//                    }
+//                }
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -306,6 +313,50 @@ fun HomeScreen(
                     }
                 }
                 Spacer(modifier = modifier.height(30.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun bannerSliding(
+
+) {
+    val listState = rememberLazyListState()
+    val items = listOf(
+        R.drawable.bannerpromohome,
+        R.drawable.bannerpromohome2,
+        R.drawable.bannerpromohome3
+    )
+
+    LaunchedEffect(Unit) {
+        var currentIndex = 0
+        while (true) {
+            delay(2000)
+            currentIndex = (currentIndex + 1) % items.size
+            listState.animateScrollToItem(
+                index = currentIndex,
+            )
+        }
+    }
+
+    LazyRow(
+        state = listState,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        items(items) { item ->
+            Card (
+                modifier = Modifier
+                    .height(120.dp)
+                    .width(353.dp)
+                    .padding(end = 5.dp)
+            ){
+                Image(
+                    painter = painterResource(id = item),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillWidth
+                )
             }
         }
     }

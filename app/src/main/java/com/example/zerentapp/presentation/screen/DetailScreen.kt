@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -101,18 +102,20 @@ fun RatingBar(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
- fun DetailCard(
+fun DetailCard(
     navController: NavController,
     detailList: List<dBarang>,
     modifier: Modifier = Modifier,
     ulasann: List<dUlasan> = Data.dataUlasan,
-
-){
+) {
     var rating by remember { mutableStateOf(0.0) }
+
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 containerColor = Color(0xFF043C5B)
             ) {
                 Row(
@@ -138,95 +141,103 @@ fun RatingBar(
                         colors = ButtonDefaults.buttonColors(Color(0xFF043C5B)),
                         shape = RectangleShape
                     ) {
-                        Text(text = "Checkout",
+                        Text(
+                            text = "Checkout",
                             color = Color.White,
                             fontWeight = FontWeight.Medium,
-                            fontSize = 18.sp)
+                            fontSize = 18.sp
+                        )
                     }
                 }
             }
         }
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 15.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 15.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
-            ) {
-                Box(
-                    modifier = Modifier,
-                    contentAlignment = Alignment.Center
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 15.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
-                    AsyncImage(
+                    Box(
+                        modifier = Modifier,
+                        contentAlignment = Alignment.Center
+                    ) {
+                        AsyncImage(
+                            modifier = Modifier
+                                .size(width = 400.dp, height = 300.dp),
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(data = detailList[0].foto)
+                                .build(),
+                            contentDescription = "Foto Barang"
+                        )
+                    }
+
+                    // Detail
+                    Text(
+                        text = detailList[0].nama,
+                        modifier = Modifier,
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "Rp" + detailList[0].harga,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+
+                    Row(
                         modifier = Modifier
-                            .size(width = 400.dp, height = 300.dp),
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(data = detailList[0].foto)
-                            .build(),
-                        contentDescription = "Foto Barang"
+                    ) {
+                        Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
+                        Text(modifier = Modifier, text = detailList[0].lokasi, fontSize = 15.sp)
+                    }
+                    Text(
+                        modifier = Modifier,
+                        text = detailList[0].detail,
+                        fontSize = 15.sp
                     )
                 }
+            }
 
-                //Detail
-                Text(
-                    text = detailList[0].nama,
-                    modifier = Modifier,
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "Rp"+detailList[0].harga,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
-                )
-
-                Row (
-                    modifier = Modifier
-                ){
-                    Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
-                    Text( modifier = Modifier, text = detailList[0].lokasi, fontSize = 15.sp)
-                }
-                Text(
-                    modifier = Modifier,
-                    text = detailList[0].detail,
-                    fontSize = 15.sp
-                )
-
-                //Ulasan
+            item {
+                // Ulasan
                 Card(
                     modifier = Modifier
-                        .width(400.dp)
-                        .height(400.dp),
+                        .fillMaxWidth()
+                        .padding(horizontal = 15.dp),
                     elevation = CardDefaults.cardElevation(10.dp),
                     colors = CardDefaults.cardColors(Color.White)
                 ) {
-                    Column(modifier = Modifier
-                        .padding(10.dp),
+                    Column(
+                        modifier = Modifier
+                            .padding(10.dp),
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
-                        ){
-                            Text(modifier = Modifier
-                                ,
+                        ) {
+                            Text(
+                                modifier = Modifier,
                                 text = "Penilaian Produk",
                                 fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold)
+                                fontWeight = FontWeight.Bold
+                            )
                             Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null)
                         }
-                        Spacer(modifier = Modifier .height(10.dp),)
-                        Row (
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(
                             modifier = Modifier,
                             verticalAlignment = Alignment.CenterVertically
-                        ){
+                        ) {
                             RatingBar(
                                 modifier = Modifier.padding(5.dp),
                                 rating = rating,
@@ -236,8 +247,10 @@ fun RatingBar(
                                 },
                                 starsColor = Color.Yellow
                             )
-                            Text(text = "4/5",
-                                color = Color.Gray)
+                            Text(
+                                text = "4/5",
+                                color = Color.Gray
+                            )
                         }
 
                         LazyRow(
@@ -246,20 +259,21 @@ fun RatingBar(
                             horizontalArrangement = Arrangement.spacedBy(20.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            items(ulasann, key = { it.id }) {
-                                UlasanScreen(ulasan = it) {
+                            items(ulasann, key = { it.id }) { ulasan ->
+                                UlasanScreen(ulasan = ulasan) {
+                                    // Handle ulasan click
                                 }
                             }
                         }
-
-
                     }
                 }
             }
-        }
+            item {
+                Spacer(modifier = Modifier.height(26.dp))
+            }
         }
     }
-
+}
 
 @Preview(showBackground = true)
 @Composable
